@@ -27,6 +27,11 @@ public class Character : MonoBehaviour {
             move += Vector3.back;
         }
 
+        Vector3 rotation = Camera.main.transform.rotation.eulerAngles;
+        rotation.x = 0;
+
+        move = Quaternion.Euler(rotation) * move;
+
         transform.Translate(move.normalized * 4 * Time.deltaTime, Space.Self);
     }
 }
