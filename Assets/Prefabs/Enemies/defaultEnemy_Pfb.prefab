@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6345400365118451916}
   - component: {fileID: 3892957720226556546}
   - component: {fileID: 1281476313734366353}
-  - component: {fileID: 4705827928912342966}
   - component: {fileID: 6453278525846701898}
+  - component: {fileID: 4705827928912342966}
   m_Layer: 10
   m_Name: defaultEnemy_Pfb
   m_TagString: Enemy
@@ -130,20 +130,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4705827928912342966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4396069080292038163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 348acbaa6374894499528702de1f3135, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  closestTarget: {fileID: 0}
-  allTargets: []
 --- !u!135 &6453278525846701898
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -165,3 +151,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 25
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4705827928912342966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396069080292038163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 348acbaa6374894499528702de1f3135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  baseHealth: 10
+  baseRegen: 0.1
+  baseDamage: 1
+  baseRange: 2
+  closestTarget: {fileID: 0}
+  allTargets: []

@@ -2,16 +2,26 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : Entity {
     public Transform closestTarget;
     public List<Transform> allTargets = new ();
 
-    private void Start() {
+    protected override void Start() {
+        GetComponent<NavMeshAgent>().stoppingDistance = baseRange - 0.5f;
+
         InvokeRepeating("UpdateTargets", 1.0f, 1.0f);
     }
 
-    private void Update() {
+    protected override void Update() {
+        base.Update();
+
         SeekTarget();
+    }
+
+    protected override void Attack() {
+        if(closestTarget.TryGetComponent<Entity>(out Entity e)) {
+            e.TakeHit(baseDamage);
+        }
     }
 
     private void UpdateTargets() {
@@ -21,7 +31,7 @@ public class Enemy : MonoBehaviour {
     private void SortTargets() {
         float newDistance = 15.0f;
         foreach (Transform target in allTargets) {
-            if (newDistance > Vector3.Distance(transform.position, target.position)) {
+            if (target && newDistance > Vector3.Distance(transform.position, target.position)) {
                 newDistance = Vector3.Distance(transform.position, target.position);
                 closestTarget = target;
             }
@@ -30,9 +40,16 @@ public class Enemy : MonoBehaviour {
 
     private void SeekTarget() {
         Vector3 direction = Vector3.zero;
-        if (closestTarget) direction = closestTarget.localPosition;
+
+        if (closestTarget) {
+            direction = closestTarget.localPosition;
+            if (Vector3.Distance(transform.position, closestTarget.position) < baseRange) {
+                Attack();
+            }
+        }
 
         GetComponent<NavMeshAgent>().destination = direction;
+
     }
     
     private void OnTriggerStay(Collider obj) {

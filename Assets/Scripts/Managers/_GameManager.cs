@@ -54,7 +54,7 @@ public class _GameManager : MonoBehaviour {
     }
 
     private void MoveCharacter() {
-        if (!character.GetComponent<NavMeshAgent>().enabled) character.GetComponent<NavMeshAgent>().enabled = true;
+        if (character && !character.GetComponent<NavMeshAgent>().enabled) character.GetComponent<NavMeshAgent>().enabled = true;
 
         Vector3 move = Vector3.zero;
         if (_Input.A_State) {
