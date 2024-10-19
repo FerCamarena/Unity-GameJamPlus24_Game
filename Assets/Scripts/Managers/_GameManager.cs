@@ -1,4 +1,4 @@
-
+using System;
 using UnityEngine;
 
 public class _GameManager : MonoBehaviour {
@@ -6,6 +6,10 @@ public class _GameManager : MonoBehaviour {
     public Camera cam;
 
     private void Update() {
+        RotateWorld();
+    }
+
+    private void RotateWorld() {
         if (_Input.D_State) {
             cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.D_Value * -.2f);
         } else if (_Input.A_State) {
