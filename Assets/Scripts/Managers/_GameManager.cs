@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,7 +6,6 @@ public class _GameManager : MonoBehaviour {
     public Camera cam;
 
     public bool onCombat = false;
-    public float speed = 5.0f;
 
     public GameObject character;
 
@@ -75,8 +73,8 @@ public class _GameManager : MonoBehaviour {
         Vector3 rotation = Camera.main.transform.rotation.eulerAngles;
         rotation.x = 0;
 
-        move = Quaternion.Euler(rotation) * move * speed;
+        move = Quaternion.Euler(rotation) * move;
 
-        character.GetComponent<NavMeshAgent>().destination = character.transform.position + move;
+        character.GetComponent<NavMeshAgent>().destination = character.transform.localPosition + move;
     }
 }
