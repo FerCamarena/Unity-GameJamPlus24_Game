@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2820137351864979749}
   - component: {fileID: 8471861465248225636}
-  - component: {fileID: -2084657899236669921}
+  - component: {fileID: -4754197047519549109}
   m_Layer: 0
-  m_Name: defaultDisplay_Pfb
+  m_Name: characterDisplay_Pfb
   m_TagString: Display
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-2084657899236669921
+--- !u!114 &-4754197047519549109
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e07cadced1149e4c96ad4d76cd5ccd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 4396069080292038163, guid: 5a2409b619e516a479b41c964076d2f1, type: 3}
+  objectPrefab: {fileID: 2803116067679759735, guid: 0df0c4ba92bf3d446be79964218b9649, type: 3}
   objectGenerated: {fileID: 0}
   levelParent: {fileID: 0}
   _Input: {fileID: 0}

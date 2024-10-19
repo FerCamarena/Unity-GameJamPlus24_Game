@@ -11,7 +11,12 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public GameObject placeholder;
     public GameObject placeholderPrefab;
     public GameObject unitDisplayPrefab;
+    public Transform level;
     public Vector3 placeholderPos;
+    
+    private void Start() {
+        if (!level) level = GameObject.Find("level").transform;
+    }
 
     private void Update() {
         if (placeholder) {
@@ -35,7 +40,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     }
 
     private void CreatePlaceholder() {
-        placeholder = Instantiate(placeholderPrefab);
+        placeholder = Instantiate(placeholderPrefab, level);
     }
 
     public void OnBeginDrag(PointerEventData eData) {
@@ -67,13 +72,13 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         deck.cardSelected = null;
         onDrag = false;
         if (!GetComponent<Image>().enabled && _Input.V_Mouse > Screen.height * 0.15f) {
-            PlaceObject();
+            CreateDisplay();
         } else if (!GetComponent<Image>().enabled) GetComponent<Image>().enabled = true;
     }
 
-    private void PlaceObject() {
+    private void CreateDisplay() {
         Destroy(placeholder);
-        Instantiate(unitDisplayPrefab, placeholderPos, Quaternion.Euler(90, 0, 0));
+        Instantiate(unitDisplayPrefab, placeholderPos, Quaternion.Euler(90, 0, 0), level);
         Destroy(gameObject);
     }
 }

@@ -14,6 +14,9 @@ public class _InputManager : MonoBehaviour {
     public float H_Mouse;
     public float V_Mouse;
 
+    //TEMP
+    public bool K_State;
+
     private void Update() {
         if(Input.GetAxis("Horizontal") > 0) {
             D_State = true;
@@ -51,5 +54,8 @@ public class _InputManager : MonoBehaviour {
 
         H_Mouse = Input.mousePosition.x;
         V_Mouse = Input.mousePosition.y;
+
+        //TEMP
+        K_State = Input.GetKeyDown(KeyCode.K);
     }
 }
