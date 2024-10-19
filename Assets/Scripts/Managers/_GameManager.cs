@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class _GameManager : MonoBehaviour {
@@ -8,9 +7,9 @@ public class _GameManager : MonoBehaviour {
 
     private void Update() {
         if (_Input.D_State) {
-            cam.transform.RotateAround(Vector3.zero, Vector3.up, -_Input.D_Value);
+            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.D_Value * -.2f);
         } else if (_Input.A_State) {
-            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.A_Value);
+            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.A_Value * .2f);
         }
 
         /*if (_Input.W_State && cam.transform.rotation.eulerAngles.x <= 50) {
