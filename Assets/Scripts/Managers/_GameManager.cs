@@ -6,6 +6,7 @@ public class _GameManager : MonoBehaviour {
     public Camera cam;
 
     public bool onCombat = false;
+    public float speed = 5.0f;
 
     public GameObject character;
 
@@ -71,8 +72,8 @@ public class _GameManager : MonoBehaviour {
         Vector3 rotation = Camera.main.transform.rotation.eulerAngles;
         rotation.x = 0;
 
-        move = Quaternion.Euler(rotation) * move;
+        move = Quaternion.Euler(rotation) * move * speed;
 
-        character.transform.Translate(move * 3 * Time.deltaTime, Space.Self);
+        character.GetComponent<Rigidbody>().velocity = move;
     }
 }
