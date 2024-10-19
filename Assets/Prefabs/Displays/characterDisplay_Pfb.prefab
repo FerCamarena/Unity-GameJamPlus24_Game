@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e07cadced1149e4c96ad4d76cd5ccd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 2803116067679759735, guid: 0df0c4ba92bf3d446be79964218b9649, type: 3}
+  objectPrefab: {fileID: 2411292322135779959, guid: 33014692b3448bd4eaab8aafc0ff4bf1, type: 3}
   objectGenerated: {fileID: 0}
   levelParent: {fileID: 0}
   _Input: {fileID: 0}
