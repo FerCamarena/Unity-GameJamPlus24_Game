@@ -9,6 +9,8 @@ TagManager:
   - Map
   - Placeholder
   - Display
+  - Player2D
+  - Player3D
   layers:
   - Default
   - TransparentFX
