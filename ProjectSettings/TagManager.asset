@@ -11,18 +11,22 @@ TagManager:
   - Display
   - Player2D
   - Player3D
+  - Structure
+  - Obstacle
+  - NPC
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Entities
+  - 
   - Water
   - UI
   - Cards
-  - 
-  - 
-  - 
-  - 
+  - Displays
+  - Allies
+  - Decorations
+  - Enemies
   - 
   - 
   - 

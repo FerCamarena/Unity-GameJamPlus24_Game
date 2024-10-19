@@ -1,3 +1,4 @@
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public GameObject unitDisplayPrefab;
     public Transform level;
     public Vector3 placeholderPos;
+
+    public NavMeshSurface navMesh;
     
     private void Start() {
         if (!level) level = GameObject.Find("level").transform;
@@ -35,7 +38,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             float newY = (hit.point.y) - (hit.point.y % 1);
             float newZ = (hit.point.z - 0.5f) - (hit.point.z % 1);
 
-            placeholderPos = new Vector3(newX, newY, newZ);
+            placeholderPos = new Vector3(newX, newY + 0.05f, newZ);
         }
     }
 
@@ -78,7 +81,9 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     private void CreateDisplay() {
         Destroy(placeholder);
-        Instantiate(unitDisplayPrefab, placeholderPos, Quaternion.Euler(90, 0, 0), level);
+        Instantiate(unitDisplayPrefab, placeholderPos, Quaternion.identity, level);
+        if (!navMesh) navMesh = GameObject.Find("navMesh2D").GetComponent<NavMeshSurface>();
+        navMesh.BuildNavMesh();
         Destroy(gameObject);
     }
 }

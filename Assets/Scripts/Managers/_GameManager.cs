@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class _GameManager : MonoBehaviour {
     public _InputManager _Input;
@@ -12,12 +12,13 @@ public class _GameManager : MonoBehaviour {
     private void Update() {
         RotateWorld();
 
-        ProcessMovement();
-
         if (_Input.K_State) {
+            if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
             onCombat = !onCombat;
             character = null;
         }
+
+        ProcessMovement();
     }
 
     private void RotateWorld() {
@@ -52,7 +53,8 @@ public class _GameManager : MonoBehaviour {
         }
     }
 
-    private void MoveCharacter(){
+    private void MoveCharacter() {
+        if (!character.GetComponent<NavMeshAgent>().enabled) character.GetComponent<NavMeshAgent>().enabled = true;
 
         Vector3 move = Vector3.zero;
         if (_Input.A_State) {
@@ -73,6 +75,6 @@ public class _GameManager : MonoBehaviour {
 
         move = Quaternion.Euler(rotation) * move;
 
-        character.transform.Translate(move * 3 * Time.deltaTime, Space.Self);
+        character.GetComponent<NavMeshAgent>().destination = character.transform.localPosition + move;
     }
 }
