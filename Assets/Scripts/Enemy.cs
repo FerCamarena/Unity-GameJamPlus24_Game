@@ -1,32 +1,28 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
     public Transform closestTarget;
-    public float closestDistance = 0;
     public List<Transform> allTargets = new ();
 
     private void Start() {
-        StartCoroutine(UpdateTargets());
+        InvokeRepeating("UpdateTargets", 1.0f, 1.0f);
     }
 
     private void Update() {
         SeekTarget();
     }
 
-    IEnumerator UpdateTargets() {
-        yield return new WaitForSeconds(1);
-
+    private void UpdateTargets() {
         if (allTargets.Count > 0) SortTargets();
-        else closestDistance = 0;
     }
 
     private void SortTargets() {
+        float newDistance = 15.0f;
         foreach (Transform target in allTargets) {
-            if(Vector3.Distance(transform.localPosition, target.localPosition) < closestDistance || closestDistance == 0) {
-                closestDistance = Vector3.Distance(transform.localPosition, target.localPosition);
+            if (newDistance > Vector3.Distance(transform.position, target.position)) {
+                newDistance = Vector3.Distance(transform.position, target.position);
                 closestTarget = target;
             }
         }
@@ -38,10 +34,20 @@ public class Enemy : MonoBehaviour {
 
         GetComponent<NavMeshAgent>().destination = direction;
     }
-
-    private void OnTriggerEnter(Collider obj) {
+    
+    private void OnTriggerStay(Collider obj) {
         if (obj.gameObject.layer == 8) {
-            allTargets.Add(obj.transform);
+            if (!allTargets.Contains(obj.transform)) {
+                allTargets.Add(obj.transform);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider obj) {
+        if (obj.gameObject.layer == 8) {
+            if (allTargets.Contains(obj.transform)) {
+                allTargets.Remove(obj.transform);
+            }
         }
     }
 }

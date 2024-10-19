@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4705827928912342966}
   - component: {fileID: 6453278525846701898}
   m_Layer: 10
-  m_Name: defaultStructure_Pfb
+  m_Name: defaultEnemy_Pfb
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,7 +143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closestTarget: {fileID: 0}
-  closestDistance: 0
   allTargets: []
 --- !u!135 &6453278525846701898
 SphereCollider:
