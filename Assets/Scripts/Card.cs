@@ -35,7 +35,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             float newY = (hit.point.y) - (hit.point.y % 1);
             float newZ = (hit.point.z - 0.5f) - (hit.point.z % 1);
 
-            placeholderPos = new Vector3(newX, newY + 0.1f, newZ);
+            placeholderPos = new Vector3(newX, newY + 0.05f, newZ);
         }
     }
 
