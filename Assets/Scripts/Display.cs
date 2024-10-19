@@ -1,4 +1,4 @@
-using System;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class Display : MonoBehaviour {
@@ -6,6 +6,8 @@ public class Display : MonoBehaviour {
     public GameObject objectGenerated;
     public Transform levelParent;
     public _InputManager _Input;
+
+    public NavMeshSurface navMesh;
 
     private void Start() {
         if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
@@ -20,6 +22,8 @@ public class Display : MonoBehaviour {
         if (_Input.K_State && !objectGenerated) {
             objectGenerated = Instantiate(objectPrefab, transform.position, Quaternion.identity, levelParent);
             GetComponent<SpriteRenderer>().enabled = false;
+            if (!navMesh) navMesh = GameObject.Find("navMesh3D").GetComponent<NavMeshSurface>();
+            navMesh.BuildNavMesh();
         } else if (_Input.K_State &&objectGenerated) {
             Destroy(objectGenerated);
             objectGenerated = null;
