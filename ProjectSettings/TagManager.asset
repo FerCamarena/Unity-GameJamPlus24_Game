@@ -6,14 +6,17 @@ TagManager:
   tags:
   - Card
   - Deck
+  - Map
+  - Placeholder
+  - Display
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Entities
   - Water
   - UI
-  - Card
+  - Cards
   - 
   - 
   - 
