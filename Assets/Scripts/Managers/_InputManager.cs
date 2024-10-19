@@ -6,10 +6,20 @@ public class _InputManager : MonoBehaviour {
     public bool W_State;
     public bool S_State;
 
+    public bool Up_State;
+    public bool Do_State;
+    public bool Lf_State;
+    public bool Rg_State;
+
     public float D_Value;
     public float A_Value;
     public float W_Value;
     public float S_Value;
+
+    public float Up_Value;
+    public float Do_Value;
+    public float Lf_Value;
+    public float Rg_Value;
 
     public float H_Mouse;
     public float V_Mouse;
@@ -18,39 +28,51 @@ public class _InputManager : MonoBehaviour {
     public bool K_State;
 
     private void Update() {
-        if(Input.GetAxis("Horizontal") > 0) {
-            D_State = true;
-            D_Value = Input.GetAxis("Horizontal");
-        } else if (Input.GetAxis("Horizontal") < 0) {
-            A_State = true;
-            A_Value = Input.GetAxis("Horizontal") * -1;
+        if(Input.GetAxis("PanH") > 0) {
+            Rg_Value = Input.GetAxis("PanH");
+        } else if (Input.GetAxis("PanH") < 0) {
+            Lf_Value = -Input.GetAxis("PanH");
         } else {
-            D_State = Input.GetKey(KeyCode.D);
-            A_State = Input.GetKey(KeyCode.A);
-
-            if (Input.GetKey(KeyCode.D)) {
-                D_Value = Mathf.Lerp(W_Value, 1, Time.deltaTime);
-            } else if (Input.GetKey(KeyCode.A)) {
-                A_Value = Mathf.Lerp(S_Value, 1, Time.deltaTime);
-            }
+            Rg_Value = 0;
+            Lf_Value = 0;
         }
 
-        if (Input.GetAxis("Vertical") > 0) {
-            W_State = true;
-            W_Value = Input.GetAxis("Vertical");
-        } else if (Input.GetAxis("Vertical") < 0) {
-            S_State = true;
-            S_Value = Input.GetAxis("Vertical") * -1;
+        if (Input.GetAxis("PanV") > 0) {
+            Up_Value = Input.GetAxis("PanV");
+        } else if (Input.GetAxis("PanV") < 0) {
+            Do_Value = -Input.GetAxis("PanV");
         } else {
-            W_State = Input.GetKey(KeyCode.W);
-            S_State = Input.GetKey(KeyCode.S);
-
-            if (Input.GetKey(KeyCode.W)) {
-                W_Value = Mathf.Lerp(W_Value, 1, Time.deltaTime);
-            } else if (Input.GetKey(KeyCode.S)) {
-                S_Value = Mathf.Lerp(S_Value, 1, Time.deltaTime);
-            }
+            Up_Value = 0;
+            Do_Value = 0;
         }
+        
+        if(Input.GetAxis("MovH") > 0) {
+            D_Value = Input.GetAxis("MovH");
+        } else if (Input.GetAxis("MovH") < 0) {
+            A_Value = -Input.GetAxis("MovH");
+        } else {
+            D_Value = 0;
+            A_Value = 0;
+        }
+
+        if (Input.GetAxis("MovV") > 0) {
+            W_Value = Input.GetAxis("MovV");
+        } else if (Input.GetAxis("MovV") < 0) {
+            S_Value = -Input.GetAxis("MovV");
+        } else {
+            W_Value = 0;
+            S_Value = 0;
+        }
+
+        Up_State = Input.GetAxis("PanV") > 0;
+        Do_State = Input.GetAxis("PanV") < 0;
+        Rg_State = Input.GetAxis("PanH") > 0;
+        Lf_State = Input.GetAxis("PanH") < 0;
+
+        W_State = Input.GetAxis("MovV") > 0;
+        S_State = Input.GetAxis("MovV") < 0;
+        D_State = Input.GetAxis("MovH") > 0;
+        A_State = Input.GetAxis("MovH") < 0;
 
         H_Mouse = Input.mousePosition.x;
         V_Mouse = Input.mousePosition.y;
