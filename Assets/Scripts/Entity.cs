@@ -28,12 +28,12 @@ public abstract class Entity : MonoBehaviour {
         if (health > baseHealth) health = baseHealth;
     }
 
-    public void Die() {
+    public virtual void Die() {
         Destroy(gameObject, 0.1f);
         this.enabled = false;
     }
 
-    public void TakeHit(float amount) {
+    public virtual void TakeHit(float amount) {
         health -= amount;
         if (health <= 0) {
             health = 0;
