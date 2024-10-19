@@ -1,12 +1,20 @@
 using UnityEngine;
-public class Entity : MonoBehaviour {
+public abstract class Entity : MonoBehaviour {
     public float health;
-    public float baseHealth;
+    public float baseHealth = 10;
 
-    public float baseRegen;
-    public float baseDamage;
+    public float baseRegen = 0.1f;
 
-    protected void Update() {
+    public float baseDamage = 1;
+
+    public float baseRange = 2;
+    
+    protected virtual void Update() {
+    }
+
+    protected virtual void Start() {
+        health = baseHealth;
+
         InvokeRepeating("DefaultRegen", 1.0f, 1.0f);
     }
 
@@ -32,4 +40,6 @@ public class Entity : MonoBehaviour {
             Die();
         }
     }
+
+    protected abstract void Attack();
 }
