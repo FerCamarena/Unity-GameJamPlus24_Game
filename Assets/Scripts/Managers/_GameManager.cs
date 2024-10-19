@@ -1,19 +1,22 @@
-using System;
 using UnityEngine;
 
 public class _GameManager : MonoBehaviour {
     public _InputManager _Input;
     public Camera cam;
 
+    public bool onCombat = false;
+
     private void Update() {
         RotateWorld();
+
+        if (_Input.K_State) onCombat = !onCombat;
     }
 
     private void RotateWorld() {
-        if (_Input.D_State) {
-            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.D_Value * -.2f);
-        } else if (_Input.A_State) {
-            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.A_Value * .2f);
+        if (_Input.Rg_State) {
+            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.Rg_Value * -.25f);
+        } else if (_Input.Lf_State) {
+            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.Lf_Value * .25f);
         }
 
         /*if (_Input.W_State && cam.transform.rotation.eulerAngles.x <= 50) {
