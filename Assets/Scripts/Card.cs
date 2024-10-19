@@ -8,6 +8,32 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public Deck deck;
     public bool onDrag;
 
+    public GameObject placeholder;
+    public GameObject placeholderPrefab;
+    public GameObject unitDisplayPrefab;
+    public Vector3 placeholderPos;
+
+    private void Update() {
+        if (placeholder) {
+            placeholder.transform.position = placeholderPos;
+        }
+        SendRaycast(false);
+    }
+
+    private void SendRaycast(bool onlyCheck) {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector2(_Input.H_Mouse, _Input.V_Mouse));
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) {
+            if (hit.collider.tag == "Map" && !placeholder && !deck.displayed && onlyCheck) {
+                CreatePlaceholder();
+            }
+            placeholderPos = hit.point;
+        }
+    }
+
+    private void CreatePlaceholder() {
+        placeholder = Instantiate(placeholderPrefab);
+    }
+
     public void OnBeginDrag(PointerEventData eData) {
         deck.displayed = false;
         deck.cardSelected = this.gameObject;
@@ -20,17 +46,30 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (_Input.V_Mouse > Screen.height * 0.25f) {
             GetComponent<Image>().enabled = false;
             deck.displayed = false;
-        } else if (_Input.V_Mouse < Screen.height * 0.15f) {
+        } else if (_Input.V_Mouse < Screen.height * 0.1f) {
             deck.displayed = true;
             if (!GetComponent<Image>().enabled) GetComponent<Image>().enabled = true;
+            if (placeholder) {
+                Destroy(placeholder);
+                placeholder = null;
+            }
+        }
+        if (_Input.V_Mouse > Screen.height * 0.1f) {
+            SendRaycast(true);
         }
     }
 
     public void OnEndDrag(PointerEventData eData) {
         deck.cardSelected = null;
-        if (!GetComponent<Image>().enabled && _Input.V_Mouse > Screen.height * 0.15f) {
-            Destroy(gameObject);
-        } else if (!GetComponent<Image>().enabled) GetComponent<Image>().enabled = true;
         onDrag = false;
+        if (!GetComponent<Image>().enabled && _Input.V_Mouse > Screen.height * 0.15f) {
+            PlaceObject();
+        } else if (!GetComponent<Image>().enabled) GetComponent<Image>().enabled = true;
+    }
+
+    private void PlaceObject() {
+        Destroy(placeholder);
+        Instantiate(unitDisplayPrefab, placeholderPos, Quaternion.Euler(90, 0, 0));
+        Destroy(gameObject);
     }
 }
