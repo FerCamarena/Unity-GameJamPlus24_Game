@@ -11,6 +11,9 @@ public class _InputManager : MonoBehaviour {
     public float W_Value;
     public float S_Value;
 
+    public float H_Mouse;
+    public float V_Mouse;
+
     private void Update() {
         if(Input.GetAxis("Horizontal") > 0) {
             D_State = true;
@@ -45,5 +48,8 @@ public class _InputManager : MonoBehaviour {
                 S_Value = Mathf.Lerp(S_Value, 1, Time.deltaTime);
             }
         }
+
+        H_Mouse = Input.mousePosition.x;
+        V_Mouse = Input.mousePosition.y;
     }
 }
