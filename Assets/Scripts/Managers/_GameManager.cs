@@ -1,23 +1,26 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class _GameManager : MonoBehaviour {
     public _InputManager _Input;
     public Camera cam;
 
     public bool onCombat = false;
+    public float speed = 5.0f;
 
     public GameObject character;
 
     private void Update() {
         RotateWorld();
 
-        ProcessMovement();
-
         if (_Input.K_State) {
+            if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
             onCombat = !onCombat;
             character = null;
         }
+
+        ProcessMovement();
     }
 
     private void RotateWorld() {
@@ -52,7 +55,8 @@ public class _GameManager : MonoBehaviour {
         }
     }
 
-    private void MoveCharacter(){
+    private void MoveCharacter() {
+        if (!character.GetComponent<NavMeshAgent>().enabled) character.GetComponent<NavMeshAgent>().enabled = true;
 
         Vector3 move = Vector3.zero;
         if (_Input.A_State) {
@@ -71,8 +75,8 @@ public class _GameManager : MonoBehaviour {
         Vector3 rotation = Camera.main.transform.rotation.eulerAngles;
         rotation.x = 0;
 
-        move = Quaternion.Euler(rotation) * move;
+        move = Quaternion.Euler(rotation) * move * speed;
 
-        character.transform.Translate(move * 3 * Time.deltaTime, Space.Self);
+        character.GetComponent<NavMeshAgent>().destination = character.transform.position + move;
     }
 }
