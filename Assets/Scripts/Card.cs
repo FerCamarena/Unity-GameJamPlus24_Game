@@ -26,7 +26,11 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             if (hit.collider.tag == "Map" && !placeholder && !deck.displayed && onlyCheck) {
                 CreatePlaceholder();
             }
-            placeholderPos = hit.point;
+            float newX = (hit.point.x - 0.5f) - (hit.point.x % 1);
+            float newY = (hit.point.y) - (hit.point.y % 1);
+            float newZ = (hit.point.z - 0.5f) - (hit.point.z % 1);
+
+            placeholderPos = new Vector3(newX, newY, newZ);
         }
     }
 
