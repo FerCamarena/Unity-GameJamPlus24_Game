@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class _GameManager : MonoBehaviour {
     public _InputManager _Input;
@@ -74,6 +75,6 @@ public class _GameManager : MonoBehaviour {
 
         move = Quaternion.Euler(rotation) * move * speed;
 
-        character.GetComponent<Rigidbody>().velocity = move;
+        character.GetComponent<NavMeshAgent>().destination = character.transform.position + move;
     }
 }
