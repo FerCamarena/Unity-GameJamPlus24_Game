@@ -31,7 +31,7 @@ public class Enemy : Entity {
     private void SortTargets() {
         float newDistance = 15.0f;
         foreach (Transform target in allTargets) {
-            if (newDistance > Vector3.Distance(transform.position, target.position)) {
+            if (target && newDistance > Vector3.Distance(transform.position, target.position)) {
                 newDistance = Vector3.Distance(transform.position, target.position);
                 closestTarget = target;
             }
