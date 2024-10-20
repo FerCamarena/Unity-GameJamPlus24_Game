@@ -8,4 +8,7 @@ public static class InGameEvent {
     public static Action OnGameStart;
 
     public static Action<Enemy> enemyKill;
+
+    public static Action GameOver;
+    public static Action GameStarted;
 }
