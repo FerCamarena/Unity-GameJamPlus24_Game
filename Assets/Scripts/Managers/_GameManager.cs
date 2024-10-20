@@ -9,6 +9,8 @@ public class _GameManager : MonoBehaviour {
 
     public GameObject character;
 
+    public float mapSize = 20.0f;
+
     private void Update() {
         RotateWorld();
 
@@ -76,5 +78,13 @@ public class _GameManager : MonoBehaviour {
         move = Quaternion.Euler(rotation) * move;
 
         character.GetComponent<NavMeshAgent>().destination = character.transform.localPosition + move;
+    }
+
+    private Vector2 GetRandomPointOnMap() {
+        float x = Random.value * (Random.value >= 0.5f ? 1 : -1);
+        float y = Random.value * (Random.value >= 0.5f ? 1 : -1);
+        Vector2 dir = new Vector2(x, y);
+
+        return dir * mapSize;
     }
 }
