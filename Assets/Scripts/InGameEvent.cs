@@ -12,4 +12,7 @@ public static class InGameEvent {
     public static Action GameOver;
     public static Action GameWon;
     public static Action GameStarted;
+
+    public static Action WaveStarted;
+    public static Action WaveEnded;
 }

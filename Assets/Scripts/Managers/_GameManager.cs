@@ -15,7 +15,8 @@ public class _GameManager : MonoBehaviour {
     public List<GameObject> enemiesSpawned = new List<GameObject>();
 
     public int mapSize = 54;
-    
+    public int currentWave = 0;
+
     private void Start() {
         if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
 
@@ -28,6 +29,8 @@ public class _GameManager : MonoBehaviour {
         if (_Input.K_State) {
             EndWave();
         }
+
+        if (enemiesSpawned.Count > 0 && currentWave >= 3) InGameEvent.GameWon();
 
         ProcessMovement();
     }
@@ -69,20 +72,30 @@ public class _GameManager : MonoBehaviour {
             }
             enemiesSpawned.Clear();
         }
+         if (currentWave < 3) InGameEvent.WaveEnded();
     }
     
     public void FirstWave() {
+        currentWave++;
+        if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
+        onCombat = !onCombat;
+        character = null;
         //Calling method to stop card playing
         onCombat = true;
-
+        InGameEvent.WaveStarted();
         //Calling method to change the music
 
         SummonWave();
     }
     
     public void SecondWave() {
+        currentWave++;
+        if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
+        onCombat = !onCombat;
+        character = null;
         //Calling method to stop card playing
 
+        InGameEvent.WaveStarted();
 
         //Calling method to change the music
 
@@ -90,8 +103,13 @@ public class _GameManager : MonoBehaviour {
     }
     
     public void ThirdWave() {
+        currentWave++;
+        if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
+        onCombat = !onCombat;
+        character = null;
         //Calling method to stop card playing
 
+        InGameEvent.WaveStarted();
 
         //Calling method to change the music
 

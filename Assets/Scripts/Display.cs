@@ -8,6 +8,17 @@ public class Display : MonoBehaviour {
     public _InputManager _Input;
 
     public NavMeshSurface navMesh;
+    
+    //Method called once the object becomes active
+    private void OnEnable() {
+        InGameEvent.WaveStarted += ToggleStage;
+        InGameEvent.WaveEnded += ToggleStage;
+    }
+    //Method called once the object becomes inactive
+    private void OnDisable() {
+        InGameEvent.WaveStarted -= ToggleStage;
+        InGameEvent.WaveEnded -= ToggleStage;
+    }
 
     private void Start() {
         if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
@@ -15,16 +26,15 @@ public class Display : MonoBehaviour {
     }
 
     private void Update() {
-        ToggleStage();
     }
 
     private void ToggleStage() {
-        if (_Input.K_State && !objectGenerated) {
+        if (!objectGenerated) {
             objectGenerated = Instantiate(objectPrefab, transform.position, Quaternion.identity, levelParent);
             GetComponent<SpriteRenderer>().enabled = false;
             if (!navMesh) navMesh = GameObject.Find("navMesh3D").GetComponent<NavMeshSurface>();
             navMesh.BuildNavMesh();
-        } else if (_Input.K_State &&objectGenerated) {
+        } else {
             Destroy(objectGenerated);
             objectGenerated = null;
             GetComponent<SpriteRenderer>().enabled = true;
