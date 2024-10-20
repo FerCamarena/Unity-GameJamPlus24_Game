@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 public abstract class Entity : MonoBehaviour {
     public float health;
     public float baseHealth = 10;
@@ -8,7 +10,10 @@ public abstract class Entity : MonoBehaviour {
     public float baseDamage = 1;
 
     public float baseRange = 2;
-    
+
+    public bool casting;
+    public float baseCD = 2;
+
     protected virtual void Update() {
     }
 
@@ -39,6 +44,12 @@ public abstract class Entity : MonoBehaviour {
             health = 0;
             Die();
         }
+    }
+
+    protected IEnumerator TryAttack() {
+        casting = true;
+        yield return new WaitForSecondsRealtime(baseCD);
+        casting = false;
     }
 
     protected abstract void Attack();

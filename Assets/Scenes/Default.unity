@@ -157,7 +157,7 @@ PrefabInstance:
     - target: {fileID: 3372073877641860270, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: unitDisplayPrefab
       value: 
-      objectReference: {fileID: 4499975434167525236, guid: 0dbf1bee8fe31e443a03a440b18a5bc1, type: 3}
+      objectReference: {fileID: 4499975434167525236, guid: 8a6991781289dfa4398dcd6ffcd32c91, type: 3}
     - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Name
       value: defaultCard_Obj_05
@@ -1470,7 +1470,7 @@ PrefabInstance:
     - target: {fileID: 3372073877641860270, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: unitDisplayPrefab
       value: 
-      objectReference: {fileID: 4499975434167525236, guid: 0dbf1bee8fe31e443a03a440b18a5bc1, type: 3}
+      objectReference: {fileID: 4499975434167525236, guid: 8a6991781289dfa4398dcd6ffcd32c91, type: 3}
     - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Name
       value: defaultCard_Obj_03
@@ -1673,7 +1673,7 @@ PrefabInstance:
     - target: {fileID: 3372073877641860270, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: unitDisplayPrefab
       value: 
-      objectReference: {fileID: 4499975434167525236, guid: 0dbf1bee8fe31e443a03a440b18a5bc1, type: 3}
+      objectReference: {fileID: 4499975434167525236, guid: 8a6991781289dfa4398dcd6ffcd32c91, type: 3}
     - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Name
       value: defaultCard_Obj_04

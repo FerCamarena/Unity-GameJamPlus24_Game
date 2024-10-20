@@ -1,21 +1,35 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using System.Collections;
 
-public class Enemy : Entity {
+public class Ally : Entity {
     public Transform closestTarget;
     public List<Transform> allTargets = new ();
 
+    public bool thinking = false;
+    public Vector3 patrolDir = Vector3.zero;
+
     protected override void Start() {
-        GetComponent<NavMeshAgent>().stoppingDistance = baseRange / 2;
+        GetComponent<NavMeshAgent>().stoppingDistance = baseRange - 1;
 
         InvokeRepeating("UpdateTargets", 1.0f, 1.0f);
+
+        InvokeRepeating("DirectPatrol", 1.0f, 1.0f);
     }
 
     protected override void Update() {
         base.Update();
 
-        SeekTarget();
+        if (closestTarget) SeekTarget();
+        else GetComponent<NavMeshAgent>().destination = patrolDir;
+    }
+
+    public void DirectPatrol() {
+        if (!thinking && !closestTarget) {
+            patrolDir = transform.position - new Vector3(Random.Range(-5, 5), 0.0f, Random.Range(-5, 5));
+            StartCoroutine(CDMovement());
+        }
     }
 
     protected override void Attack() {
@@ -41,21 +55,25 @@ public class Enemy : Entity {
         }
     }
 
+    private IEnumerator CDMovement() {
+        thinking = true;
+        yield return new WaitForSecondsRealtime(baseCD);
+        thinking = false;
+    }
+
     private void SeekTarget() {
         Vector3 direction = Vector3.zero;
 
-        if (closestTarget) {
-            direction = closestTarget.localPosition;
-            if (Vector3.Distance(transform.position, closestTarget.position) < baseRange && !casting) {
-                Attack();
-            }
+        direction = closestTarget.localPosition;
+        if (Vector3.Distance(transform.position, closestTarget.position) < baseRange && !casting) {
+            Attack(); 
         }
 
         GetComponent<NavMeshAgent>().destination = direction;
     }
 
     private void OnTriggerStay(Collider obj) {
-        if (obj.gameObject.layer == 8) {
+        if (obj.gameObject.layer == 10) {
             if (!allTargets.Contains(obj.transform)) {
                 allTargets.Add(obj.transform);
             }
@@ -63,7 +81,7 @@ public class Enemy : Entity {
     }
 
     private void OnTriggerExit(Collider obj) {
-        if (obj.gameObject.layer == 8) {
+        if (obj.gameObject.layer == 10) {
             if (allTargets.Contains(obj.transform)) {
                 allTargets.Remove(obj.transform);
             }
