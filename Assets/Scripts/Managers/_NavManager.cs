@@ -12,20 +12,16 @@ public class _NavManager : MonoBehaviour {
 
     //Method called once the object becomes active
     private void OnEnable() {
-        InGameEvent.OnGameOver += GameOver;
+        InGameEvent.GameOver += GameOver;
     }
     //Method called once the object becomes inactive
     private void OnDisable() {
-        InGameEvent.OnGameOver -= GameOver;
+        InGameEvent.GameOver -= GameOver;
     }
 
     //Method called once the script instance is loaded
     private void Awake() {
         //Loading defaults preferences
-        if (PlayerPrefs.GetInt("charactersUnlocked") < 1 || !PlayerPrefs.HasKey("charactersUnlocked") || PlayerPrefs.GetInt("charactersUnlocked") > 7) {
-            //Checking the first time playing
-            PlayerPrefs.SetInt("charactersUnlocked", 1);
-        }
         if (PlayerPrefs.GetInt("settingsMenu") < 0 || !PlayerPrefs.HasKey("settingsMenu") || PlayerPrefs.GetInt("settingsMenu") > 1) {
             //Checking the first time playing
             PlayerPrefs.SetInt("settingsMenu", 0);
@@ -43,7 +39,7 @@ public class _NavManager : MonoBehaviour {
         //Stablishing game state as on
         PlayerPrefs.SetInt("inGame", 1);
         //Loading the game scene
-        ChangeScene(6);
+        ChangeScene(2);
     }
 
     //Method for ending the game session
@@ -51,7 +47,7 @@ public class _NavManager : MonoBehaviour {
         //Stablishing game state as off
         PlayerPrefs.SetInt("inGame", 0);
         //Sending the user to the game over screen
-        ChangeScene(7);
+        ChangeScene(3);
     }
 
     //Method for changing scenes
@@ -78,14 +74,14 @@ public class _NavManager : MonoBehaviour {
             //Marking the value for settings scene closed
             PlayerPrefs.SetInt("settingsMenu", 0);
             //Unloading the settings scene
-            SceneManager.UnloadSceneAsync(8);
+            SceneManager.UnloadSceneAsync(1);
             //Unpausing the game
             Time.timeScale = 1;
         } else {
             //Marking the value for settings scene openned
             PlayerPrefs.SetInt("settingsMenu", 1);
             //Loading the settings scene in additive mode
-            SceneManager.LoadScene(8, LoadSceneMode.Additive);
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
             //Pausing the game
             Time.timeScale = 0;
         }
