@@ -15,7 +15,10 @@ public class _GameManager : MonoBehaviour {
     public List<GameObject> enemiesSpawned = new List<GameObject>();
 
     public int mapSize = 54;
-    
+    public int currentWave = 0;
+
+    public int enemyAmount = 1;
+
     private void Start() {
         if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
 
@@ -31,14 +34,6 @@ public class _GameManager : MonoBehaviour {
 
         ProcessMovement();
     }
-    
-    private void OnEnable() {
-        InGameEvent.enemyKill += RemoveEnemy;
-    }
-    
-    private void OnDisable() {
-        InGameEvent.enemyKill -= RemoveEnemy;
-    }
 
     private void InitializeGame() {
         Invoke("FirstWave", 15);
@@ -47,23 +42,25 @@ public class _GameManager : MonoBehaviour {
         Invoke("EndWave", 90);
         Invoke("ThirdWave", 105);
         Invoke("EndWave", 135);
-        Invoke("EndGame", 140);
+        Invoke("EndGame", 135);
+
+        PlayerPrefs.SetInt("lastPoints", 0);
+        PlayerPrefs.SetInt("lastUsed", 0);
+        PlayerPrefs.Save();
     }
 
     public void EndGame() {
         InGameEvent.GameWon();
     }
 
-    public void RemoveEnemy(Enemy enemy) { 
-        if (enemiesSpawned.Contains(enemy.gameObject)) enemiesSpawned.Remove(enemy.gameObject);
-    }
-
     public void EndWave() {
+        if (currentWave <= 3) InGameEvent.WaveEnded();
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
-        onCombat = !onCombat;
+        onCombat = false;
         character = null;
 
-        if (enemiesSpawned.Count > 0) { 
+        if (enemiesSpawned.Count > 0) {
+            enemiesSpawned.RemoveAll(item => item == null);
             foreach (GameObject enemy in enemiesSpawned) { 
                 Destroy(enemy, 0.1f);
             }
@@ -72,17 +69,26 @@ public class _GameManager : MonoBehaviour {
     }
     
     public void FirstWave() {
+        currentWave++;
+        if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
+        onCombat = true;
+        character = null;
         //Calling method to stop card playing
         onCombat = true;
-
+        InGameEvent.WaveStarted();
         //Calling method to change the music
 
         SummonWave();
     }
     
     public void SecondWave() {
+        currentWave++;
+        if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
+        onCombat = true;
+        character = null;
         //Calling method to stop card playing
 
+        InGameEvent.WaveStarted();
 
         //Calling method to change the music
 
@@ -90,8 +96,13 @@ public class _GameManager : MonoBehaviour {
     }
     
     public void ThirdWave() {
+        currentWave++;
+        if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
+        onCombat = !onCombat;
+        character = null;
         //Calling method to stop card playing
 
+        InGameEvent.WaveStarted();
 
         //Calling method to change the music
 
@@ -100,18 +111,16 @@ public class _GameManager : MonoBehaviour {
 
     private void RotateWorld() {
         if (_Input.Rg_State) {
-            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.Rg_Value * -.25f);
+            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.Rg_Value * -25 * Time.deltaTime);
         } else if (_Input.Lf_State) {
-            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.Lf_Value * .25f);
+            cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.Lf_Value * 25 * Time.deltaTime);
         }
 
-        /*if (_Input.W_State && cam.transform.rotation.eulerAngles.x <= 50) {
-            Debug.Log(cam.transform.rotation.eulerAngles.x);
-            cam.transform.RotateAround(Vector3.zero, Vector3.left, -_Input.W_Value);
-        } else if(_Input.S_State && cam.transform.rotation.eulerAngles.x >= 10) {
-            Debug.Log(cam.transform.rotation.eulerAngles.x);
-            cam.transform.RotateAround(Vector3.zero, Vector3.left, _Input.S_Value);
-        }*/
+        if (_Input.Up_State && cam.transform.rotation.eulerAngles.x <= 80) {
+            cam.transform.parent.RotateAround(Vector3.zero, -cam.transform.right, _Input.Up_Value * -10 * Time.deltaTime);
+        } else if(_Input.Do_State && cam.transform.rotation.eulerAngles.x >= 25) {
+            cam.transform.parent.RotateAround(Vector3.zero, -cam.transform.right, _Input.Do_Value * 10 * Time.deltaTime);
+        }
     }
     
     private void ProcessMovement() {
@@ -152,9 +161,11 @@ public class _GameManager : MonoBehaviour {
     }
 
     private void SummonWave() {
-        Vector2 pos = GetRandomPointOnMap();
-        GameObject obj = Instantiate(enemies[0], new Vector3(pos.x, 0, pos.y),Quaternion.identity);
-        enemiesSpawned.Add(obj);
+        for(int i = 0; i < enemyAmount; i++) { 
+            Vector2 pos = GetRandomPointOnMap();
+            GameObject obj = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(pos.x, 0, pos.y),Quaternion.identity);
+            enemiesSpawned.Add(obj);
+        }
     }
 
     private Vector2 GetRandomPointOnMap() {

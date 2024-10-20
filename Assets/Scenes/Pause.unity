@@ -253,12 +253,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 1980326877}
+    m_SelectOnDown: {fileID: 1832535093}
+    m_SelectOnLeft: {fileID: 539637878}
+    m_SelectOnRight: {fileID: 1241804115}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -380,8 +380,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
+  m_HorizontalAxis: SelH
+  m_VerticalAxis: SelV
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 8
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1980326875}
   m_sendNavigationEvents: 1
   m_DragThreshold: 8
 --- !u!1 &487865895
@@ -664,12 +664,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1980326877}
+    m_SelectOnDown: {fileID: 1832535093}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 206557281}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1005,11 +1005,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnUp: {fileID: 1980326877}
+    m_SelectOnDown: {fileID: 1832535093}
+    m_SelectOnLeft: {fileID: 206557281}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -1138,9 +1138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 539637878}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -1169,6 +1169,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1980109160}
+        m_TargetAssemblyTypeName: _NavManager, Assembly-CSharp
+        m_MethodName: SettingsMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1980109160}
         m_TargetAssemblyTypeName: _NavManager, Assembly-CSharp
         m_MethodName: ChangeScene
@@ -1307,6 +1319,7 @@ GameObject:
   - component: {fileID: 1980109162}
   - component: {fileID: 1980109161}
   - component: {fileID: 1980109160}
+  - component: {fileID: 1980109166}
   - component: {fileID: 1980109165}
   m_Layer: 5
   m_Name: UI
@@ -1330,6 +1343,7 @@ MonoBehaviour:
   masterMixer: {fileID: 0}
   fxMixer: {fileID: 0}
   musicMixer: {fileID: 0}
+  _Input: {fileID: 0}
 --- !u!114 &1980109161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1446,6 +1460,38 @@ MonoBehaviour:
   languageDropdown: {fileID: 0}
   nextAction: 0
   isActionConfirmed: 0
+--- !u!114 &1980109166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980109159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324c96d7037ac6240b45a2f3869a7700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  D_State: 0
+  A_State: 0
+  W_State: 0
+  S_State: 0
+  Up_State: 0
+  Do_State: 0
+  Lf_State: 0
+  Rg_State: 0
+  D_Value: 0
+  A_Value: 0
+  W_Value: 0
+  S_Value: 0
+  Up_Value: 0
+  Do_Value: 0
+  Lf_Value: 0
+  Rg_Value: 0
+  H_Mouse: 0
+  V_Mouse: 0
+  Esc_State: 0
+  K_State: 0
 --- !u!1 &1980326875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,10 +1544,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 539637878}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1

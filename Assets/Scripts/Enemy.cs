@@ -7,6 +7,8 @@ public class Enemy : Entity {
     public List<Transform> allTargets = new ();
 
     protected override void Start() {
+        base.Start();
+
         GetComponent<NavMeshAgent>().stoppingDistance = baseRange / 2;
 
         InvokeRepeating("UpdateTargets", 1.0f, 1.0f);
@@ -33,6 +35,7 @@ public class Enemy : Entity {
 
     private void SortTargets() {
         float newDistance = 15.0f;
+        allTargets.RemoveAll(item => item == null);
         foreach (Transform target in allTargets) {
             if (target && newDistance >= Vector3.Distance(transform.position, target.position)) {
                 newDistance = Vector3.Distance(transform.position, target.position);
@@ -68,5 +71,12 @@ public class Enemy : Entity {
                 allTargets.Remove(obj.transform);
             }
         }
+    }
+
+    public override void Die() {
+        base.Die();
+
+        PlayerPrefs.SetInt("lastPoints", PlayerPrefs.GetInt("lastPoints") + 10);
+        PlayerPrefs.Save();
     }
 }

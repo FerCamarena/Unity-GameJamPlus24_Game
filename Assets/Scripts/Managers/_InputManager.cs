@@ -24,6 +24,8 @@ public class _InputManager : MonoBehaviour {
     public float H_Mouse;
     public float V_Mouse;
 
+    public bool Esc_State;
+
     //TEMP
     public bool K_State;
 
@@ -76,6 +78,8 @@ public class _InputManager : MonoBehaviour {
 
         H_Mouse = Input.mousePosition.x;
         V_Mouse = Input.mousePosition.y;
+
+        Esc_State = (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7));
 
         //TEMP
         K_State = Input.GetKeyDown(KeyCode.K);

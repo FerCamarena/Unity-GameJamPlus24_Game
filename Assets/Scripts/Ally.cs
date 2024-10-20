@@ -10,7 +10,11 @@ public class Ally : Entity {
     public bool thinking = false;
     public Vector3 patrolDir = Vector3.zero;
 
+    public GameObject displaySpawn;
+
     protected override void Start() {
+        base.Start();
+
         GetComponent<NavMeshAgent>().stoppingDistance = baseRange - 1;
 
         InvokeRepeating("UpdateTargets", 1.0f, 1.0f);
@@ -47,6 +51,7 @@ public class Ally : Entity {
 
     private void SortTargets() {
         float newDistance = 15.0f;
+        allTargets.RemoveAll(item => item == null);
         foreach (Transform target in allTargets) {
             if (target && newDistance >= Vector3.Distance(transform.position, target.position)) {
                 newDistance = Vector3.Distance(transform.position, target.position);
@@ -85,6 +90,14 @@ public class Ally : Entity {
             if (allTargets.Contains(obj.transform)) {
                 allTargets.Remove(obj.transform);
             }
+        }
+    }
+
+    public override void Die() {
+        base.Die();
+
+        if (displaySpawn) {
+            Destroy(displaySpawn);
         }
     }
 }

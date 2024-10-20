@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 8130945827303818195}
   - component: {fileID: 4542687135426569762}
   - component: {fileID: 3372073877641860270}
-  m_Layer: 6
+  - component: {fileID: 2598060091640269962}
+  m_Layer: 5
   m_Name: defaultCard_Pfb
   m_TagString: Card
   m_Icon: {fileID: 0}
@@ -26,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4551940594263158951}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -88,5 +89,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4f6a9574dc112429dc140b5f9f33fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  _Input: {fileID: 0}
+  _Game: {fileID: 0}
+  canvas: {fileID: 0}
+  deck: {fileID: 0}
   onDrag: 0
+  placeholder: {fileID: 0}
+  placeholderPrefab: {fileID: 1069311006730747522, guid: b1e4d743ed5ef8c4aa394eb42b57bc61, type: 3}
+  unitDisplayPrefab: {fileID: 4499975434167525236, guid: 0dbf1bee8fe31e443a03a440b18a5bc1, type: 3}
+  level: {fileID: 0}
+  placeholderPos: {x: 0, y: 0, z: 0}
+  navMesh: {fileID: 0}
+--- !u!114 &2598060091640269962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4551940594263158951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 4
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
+    m_HighlightedColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
+    m_PressedColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
+    m_SelectedColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 4542687135426569762}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
