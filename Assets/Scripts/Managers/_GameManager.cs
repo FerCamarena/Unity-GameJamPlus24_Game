@@ -15,7 +15,47 @@ public class _GameManager : MonoBehaviour {
     private void Start() {
         if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
 
-        InvokeRepeating("SummonWave", 1.0f, 1.0f);
+        InitializeGame();
+    }
+
+    private void InitializeGame() {
+        Invoke("FirstWave", 15);
+        Invoke("EndWave", 45);
+        Invoke("SecondWave", 60);
+        Invoke("EndWave", 90);
+        Invoke("ThirdWave", 105);
+        Invoke("EndWave", 135);
+    }
+
+    public void EndWave() { 
+        onCombat = false;
+    }
+    
+    public void FirstWave() {
+        //Calling method to stop card playing
+        onCombat = true;
+
+        //Calling method to change the music
+
+        SummonWave();
+    }
+    
+    public void SecondWave() {
+        //Calling method to stop card playing
+
+
+        //Calling method to change the music
+
+        SummonWave();
+    }
+    
+    public void ThirdWave() {
+        //Calling method to stop card playing
+
+
+        //Calling method to change the music
+
+        SummonWave();
     }
 
     private void Update() {
