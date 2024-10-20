@@ -17,6 +17,8 @@ public class _GameManager : MonoBehaviour {
     public int mapSize = 54;
     public int currentWave = 0;
 
+    public int enemyAmount = 1;
+
     private void Start() {
         if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
 
@@ -29,8 +31,6 @@ public class _GameManager : MonoBehaviour {
         if (_Input.K_State) {
             EndWave();
         }
-
-        if (enemiesSpawned.Count > 0 && currentWave >= 3) InGameEvent.GameWon();
 
         ProcessMovement();
     }
@@ -50,7 +50,6 @@ public class _GameManager : MonoBehaviour {
         Invoke("EndWave", 90);
         Invoke("ThirdWave", 105);
         Invoke("EndWave", 135);
-        Invoke("EndGame", 140);
 
         PlayerPrefs.SetInt("lastPoints", 0);
         PlayerPrefs.SetInt("lastUsed", 0);
@@ -66,6 +65,7 @@ public class _GameManager : MonoBehaviour {
     }
 
     public void EndWave() {
+        if (currentWave < 2) InGameEvent.WaveEnded();
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
         onCombat = !onCombat;
         character = null;
@@ -76,7 +76,6 @@ public class _GameManager : MonoBehaviour {
             }
             enemiesSpawned.Clear();
         }
-         if (currentWave < 3) InGameEvent.WaveEnded();
     }
     
     public void FirstWave() {
@@ -172,9 +171,11 @@ public class _GameManager : MonoBehaviour {
     }
 
     private void SummonWave() {
-        Vector2 pos = GetRandomPointOnMap();
-        GameObject obj = Instantiate(enemies[0], new Vector3(pos.x, 0, pos.y),Quaternion.identity);
-        enemiesSpawned.Add(obj);
+        for(int i = 0; i < enemyAmount; i++) { 
+            Vector2 pos = GetRandomPointOnMap();
+            GameObject obj = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(pos.x, 0, pos.y),Quaternion.identity);
+            enemiesSpawned.Add(obj);
+        }
     }
 
     private Vector2 GetRandomPointOnMap() {
