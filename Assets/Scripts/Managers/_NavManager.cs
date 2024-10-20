@@ -13,10 +13,12 @@ public class _NavManager : MonoBehaviour {
     //Method called once the object becomes active
     private void OnEnable() {
         InGameEvent.GameOver += GameOver;
+        InGameEvent.GameWon += GameWon;
     }
     //Method called once the object becomes inactive
     private void OnDisable() {
         InGameEvent.GameOver -= GameOver;
+        InGameEvent.GameWon -= GameWon;
     }
 
     //Method called once the script instance is loaded
@@ -29,9 +31,9 @@ public class _NavManager : MonoBehaviour {
         //Saving the player prefs settings
         PlayerPrefs.Save();
         //Loading the mixer values
-        masterMixer.SetFloat("mixerMaster", PlayerPrefs.GetFloat("masterVolume") - 100);
-        fxMixer.SetFloat("mixerFX", PlayerPrefs.GetFloat("fxVolume") - 100);
-        musicMixer.SetFloat("mixerMusic", PlayerPrefs.GetFloat("musicVolume") - 100);
+        if (masterMixer) masterMixer.SetFloat("mixerMaster", PlayerPrefs.GetFloat("master") != 0 ? 0 : -80);
+        if (fxMixer) fxMixer.SetFloat("mixerFX", PlayerPrefs.GetFloat("fx") != 0 ? 0 : -80);
+        if (musicMixer) musicMixer.SetFloat("mixerMusic", PlayerPrefs.GetFloat("music") != 0 ? 0 : -80);
     }
 
     //Method for starting a new game
@@ -48,6 +50,14 @@ public class _NavManager : MonoBehaviour {
         PlayerPrefs.SetInt("inGame", 0);
         //Sending the user to the game over screen
         ChangeScene(3);
+    }
+
+    //Method for ending the game session
+    public void GameWon() {
+        //Stablishing game state as off
+        PlayerPrefs.SetInt("inGame", 0);
+        //Sending the user to the game over screen
+        ChangeScene(4);
     }
 
     //Method for changing scenes
