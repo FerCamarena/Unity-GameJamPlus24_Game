@@ -555,9 +555,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746c64db5fe6dc54692fb57759979dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterMixer: {fileID: 24100000, guid: 10ded07b797860446bd97044d6dc1b26, type: 2}
-  fxMixer: {fileID: 24100000, guid: 13057118c3ddc75459e20ed079c4397d, type: 2}
-  musicMixer: {fileID: 24100000, guid: 5eeb179cce9204049a39d8a63ad0dfc7, type: 2}
+  masterMixer: {fileID: 0}
+  fxMixer: {fileID: 0}
+  musicMixer: {fileID: 0}
 --- !u!1 &881764290
 GameObject:
   m_ObjectHideFlags: 0
