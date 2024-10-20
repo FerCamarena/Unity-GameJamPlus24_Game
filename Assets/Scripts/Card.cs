@@ -9,6 +9,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public Canvas canvas;
     public Deck deck;
     public bool onDrag;
+    public bool empty;
 
     public GameObject placeholder;
     public GameObject placeholderPrefab;
@@ -27,7 +28,6 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     private void Update() {
         if (placeholder) {
             placeholder.transform.position = placeholderPos;
-            if (_Game.onCombat) Destroy(placeholder);
         }
         SendRaycast(false);
     }
@@ -35,14 +35,18 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     private void SendRaycast(bool onlyCheck) {
         Ray ray = Camera.main.ScreenPointToRay(new Vector2(_Input.H_Mouse, _Input.V_Mouse));
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) {
-            if (hit.collider.tag == "Map" && !placeholder && !deck.displayed && onlyCheck) {
+            if (hit.collider.tag == "Map" && !placeholder && !deck.displayed && !_Game.onCombat && onlyCheck) {
                 CreatePlaceholder();
             }
-            float newX = (hit.point.x - 0.5f) - (hit.point.x % 1);
+            float newX = (hit.point.x) - (hit.point.x % 1);
             float newY = (hit.point.y) - (hit.point.y % 1);
-            float newZ = (hit.point.z - 0.5f) - (hit.point.z % 1);
+            float newZ = (hit.point.z) - (hit.point.z % 1);
 
             placeholderPos = new Vector3(newX, newY + 0.05f, newZ);
+
+            empty = hit.collider.gameObject.layer != 7 && hit.collider.gameObject.layer != 8;
+
+            if (!empty || _Game.onCombat) placeholderPos = Vector3.down * 3;
         }
     }
 
@@ -78,13 +82,20 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public void OnEndDrag(PointerEventData eData) {
         deck.cardSelected = null;
         onDrag = false;
-        if (!GetComponent<Image>().enabled && _Input.V_Mouse > Screen.height * 0.15f && !_Game.onCombat) {
+        if (!GetComponent<Image>().enabled && _Input.V_Mouse > Screen.height * 0.15f && !_Game.onCombat && empty) {
             CreateDisplay();
-        } else if (!GetComponent<Image>().enabled) GetComponent<Image>().enabled = true;
+        } else if (!GetComponent<Image>().enabled) {
+            GetComponent<Image>().enabled = true;
+            if (!empty || _Game.onCombat) {
+                Destroy(placeholder);
+                placeholder = null;
+            }
+        }
     }
 
     private void CreateDisplay() {
         Destroy(placeholder);
+        placeholder = null;
         Instantiate(unitDisplayPrefab, placeholderPos, Quaternion.identity, level);
         if (!navMesh) navMesh = GameObject.Find("navMesh2D").GetComponent<NavMeshSurface>();
         navMesh.BuildNavMesh();
