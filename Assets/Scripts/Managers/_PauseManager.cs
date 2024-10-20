@@ -45,13 +45,13 @@ public class _PauseManager : MonoBehaviour {
     //Method for loading and displaying previous preferences
     private void LoadPreferences() {
         //Loading all the volume channels previous sessions
-        masterVolumeSlider.value = PlayerPrefs.GetFloat("masterVolume", 50.0f);
-        fxVolumeSlider.value = PlayerPrefs.GetFloat("fxVolume", 50.0f);
-        musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume", 50.0f);
+        if (masterVolumeSlider) masterVolumeSlider.value = PlayerPrefs.GetFloat("masterVolume", 50.0f);
+        if (fxVolumeSlider) fxVolumeSlider.value = PlayerPrefs.GetFloat("fxVolume", 50.0f);
+        if (musicVolumeSlider) musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume", 50.0f);
         //Loading previous quality settings from previous sessions
-        qualityDropdown.value = PlayerPrefs.GetInt("qualityIndex", 0);
+        if (qualityDropdown) qualityDropdown.value = PlayerPrefs.GetInt("qualityIndex", 0);
         //Loading previous language settings from previous sessions
-        languageDropdown.value = PlayerPrefs.GetInt("languageIndex", 0);
+        if (languageDropdown) languageDropdown.value = PlayerPrefs.GetInt("languageIndex", 0);
     }
 
     //Method for update appareances from first call
@@ -59,13 +59,13 @@ public class _PauseManager : MonoBehaviour {
         //Checking if the scene is not being load from game scene
         if (PlayerPrefs.GetInt("inGame") != 1) {
             //Hiding in-game buttons
-            mainMenuButton.SetActive(false);
-            restartGameButton.SetActive(false);
+            if (mainMenuButton) mainMenuButton.SetActive(false);
+            if (restartGameButton) restartGameButton.SetActive(false);
         }
         //Updating all volume channels appareances from previous inputs
-        UpdateMasterVisuals();
-        UpdateFXVisuals();
-        UpdateMusicVisuals();
+        if (masterVolumeSlider) UpdateMasterVisuals();
+        if (fxVolumeSlider) UpdateFXVisuals();
+        if (musicVolumeSlider) UpdateMusicVisuals();
     }
 
     //Method for updating the quality settings index value
@@ -83,7 +83,7 @@ public class _PauseManager : MonoBehaviour {
     }
 
     //Method for updating the master volume values
-    private void UpdateMasterVolume() {
+    public void UpdateMasterVolume() {
         //Updating the PlayerPref for master value
         PlayerPrefs.SetFloat("masterVolume", masterVolumeSlider.value);
         //Sending the values to the Master mix channel
@@ -128,7 +128,7 @@ public class _PauseManager : MonoBehaviour {
     }
 
     //Method for toggle Master volume mute
-    private void ToggleMasterVolume() {
+    public void ToggleMasterVolume() {
         //Toggling between mute and unmute Master channel based on current value
         if (masterVolumeSlider.value > 0f) {
             //Saving the previous Master volume into preferences
@@ -174,7 +174,7 @@ public class _PauseManager : MonoBehaviour {
     }
 
     //Method for updating Master volume visuals current values
-    private void UpdateMasterVisuals() {
+    public void UpdateMasterVisuals() {
         //Checks if the Master volume value is more than 0
         if (masterVolumeSlider.value > 0f) {
             //Changing the button sprite for the unmuted one
@@ -186,7 +186,7 @@ public class _PauseManager : MonoBehaviour {
     }
 
     //Method for updating the FX volume values
-    private void UpdateFXVolume() {
+    public void UpdateFXVolume() {
         //Updating the PlayerPref for FX value
         PlayerPrefs.SetFloat("fxVolume", fxVolumeSlider.value);
         //Sending the values to the FX mix channel
@@ -228,7 +228,7 @@ public class _PauseManager : MonoBehaviour {
     }
 
     //Method for updating FX volume visuals current values
-    private void UpdateFXVisuals() {
+    public void UpdateFXVisuals() {
         //Checks if the FX volume value is more than 0
         if (fxVolumeSlider.value > 0f) {
             //Changing the button sprite for the unmuted one
@@ -240,7 +240,7 @@ public class _PauseManager : MonoBehaviour {
     }
 
     //Method for updating the Music volume values
-    private void UpdateMusicVolume() {
+    public void UpdateMusicVolume() {
         //Updating the PlayerPref for Music value
         PlayerPrefs.SetFloat("musicVolume", musicVolumeSlider.value);
         //Sending the values to the Music mix channel
@@ -258,7 +258,7 @@ public class _PauseManager : MonoBehaviour {
     }
 
     //Method for toggle Music volume mute
-    private void ToggleMusicVolume() {
+    public void ToggleMusicVolume() {
         //Toggling between mute and unmute Music channel based on current value
         if (musicVolumeSlider.value > 0f) {
             //Saving the previous Music volume into preferences
@@ -282,7 +282,7 @@ public class _PauseManager : MonoBehaviour {
     }
 
     //Method for updating Music volume visuals current values
-    private void UpdateMusicVisuals() {
+    public void UpdateMusicVisuals() {
         //Checks if the Music volume value is more than 0
         if (musicVolumeSlider.value > 0f) {
             //Changing the button sprite for the unmuted one
