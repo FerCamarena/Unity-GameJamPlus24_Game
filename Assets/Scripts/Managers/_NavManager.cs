@@ -12,10 +12,16 @@ public class _NavManager : MonoBehaviour {
     [SerializeField] private AudioMixer musicMixer;
     public _InputManager _Input;
 
+    public GameObject ndStar;
+    public GameObject rdStar;
+
     //Method called once the object becomes active
     private void OnEnable() {
         InGameEvent.GameOver += GameOver;
         InGameEvent.GameWon += GameWon;
+
+        if (ndStar && PlayerPrefs.GetInt("lastPoints") < 30) ndStar.SetActive(false);
+        if (rdStar && PlayerPrefs.GetInt("lastUsed") > 4) ndStar.SetActive(false);
     }
     //Method called once the object becomes inactive
     private void OnDisable() {

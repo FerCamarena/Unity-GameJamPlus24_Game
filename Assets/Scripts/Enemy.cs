@@ -69,4 +69,11 @@ public class Enemy : Entity {
             }
         }
     }
+
+    public override void Die() {
+        base.Die();
+
+        PlayerPrefs.SetInt("lastPoints", PlayerPrefs.GetInt("lastPoints") + 10);
+        PlayerPrefs.Save();
+    }
 }

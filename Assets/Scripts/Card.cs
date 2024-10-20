@@ -100,5 +100,8 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (!navMesh) navMesh = GameObject.Find("navMesh2D").GetComponent<NavMeshSurface>();
         navMesh.BuildNavMesh();
         Destroy(gameObject);
+
+        PlayerPrefs.SetInt("lastUsed", PlayerPrefs.GetInt("lastUsed") + 1);
+        PlayerPrefs.Save();
     }
 }

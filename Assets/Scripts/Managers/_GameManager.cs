@@ -51,6 +51,10 @@ public class _GameManager : MonoBehaviour {
         Invoke("ThirdWave", 105);
         Invoke("EndWave", 135);
         Invoke("EndGame", 140);
+
+        PlayerPrefs.SetInt("lastPoints", 0);
+        PlayerPrefs.SetInt("lastUsed", 0);
+        PlayerPrefs.Save();
     }
 
     public void EndGame() {
