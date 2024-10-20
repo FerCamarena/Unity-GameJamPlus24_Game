@@ -19,6 +19,11 @@ public class _GameManager : MonoBehaviour {
 
     public int enemyAmount = 1;
 
+    public AudioClip combat;
+    public AudioClip building;
+
+    public AudioSource soundtrack;
+
     private void Start() {
         if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
 
@@ -36,13 +41,13 @@ public class _GameManager : MonoBehaviour {
     }
 
     private void InitializeGame() {
-        Invoke("FirstWave", 15);
-        Invoke("EndWave", 45);
-        Invoke("SecondWave", 60);
-        Invoke("EndWave", 90);
-        Invoke("ThirdWave", 105);
-        Invoke("EndWave", 135);
-        Invoke("EndGame", 135);
+        Invoke("FirstWave", 38f);
+        Invoke("EndWave", 38f + 58f);
+        Invoke("SecondWave", 38f + 58f + 38f);
+        Invoke("EndWave", 38f + 58f + 38f + 58f);
+        Invoke("ThirdWave", 38f + 58f + 38f + 58f + 38f);
+        Invoke("EndWave", 38f + 58f + 38f + 58f + 38f + 58f);
+        Invoke("EndGame", 300);
 
         PlayerPrefs.SetInt("lastPoints", 0);
         PlayerPrefs.SetInt("lastUsed", 0);
@@ -50,6 +55,8 @@ public class _GameManager : MonoBehaviour {
     }
 
     public void EndGame() {
+        soundtrack.clip = building;
+        soundtrack.Play();
         InGameEvent.GameWon();
     }
 
@@ -69,6 +76,8 @@ public class _GameManager : MonoBehaviour {
     }
     
     public void FirstWave() {
+        soundtrack.clip = combat;
+        soundtrack.Play();
         currentWave++;
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
         onCombat = true;
@@ -82,6 +91,8 @@ public class _GameManager : MonoBehaviour {
     }
     
     public void SecondWave() {
+        soundtrack.clip = combat;
+        soundtrack.Play();
         currentWave++;
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
         onCombat = true;
@@ -96,6 +107,8 @@ public class _GameManager : MonoBehaviour {
     }
     
     public void ThirdWave() {
+        soundtrack.clip = combat;
+        soundtrack.Play();
         currentWave++;
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
         onCombat = !onCombat;
