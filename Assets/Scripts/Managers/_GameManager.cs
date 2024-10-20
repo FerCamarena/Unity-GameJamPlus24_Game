@@ -47,6 +47,11 @@ public class _GameManager : MonoBehaviour {
         Invoke("EndWave", 90);
         Invoke("ThirdWave", 105);
         Invoke("EndWave", 135);
+        Invoke("EndGame", 140);
+    }
+
+    public void EndGame() {
+        InGameEvent.GameWon();
     }
 
     public void RemoveEnemy(Enemy enemy) { 
