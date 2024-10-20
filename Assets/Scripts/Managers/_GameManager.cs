@@ -1,21 +1,43 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 public class _GameManager : MonoBehaviour {
     public _InputManager _Input;
     public Camera cam;
 
     public bool onCombat = false;
+    public bool forceEnd = true;
 
     public GameObject character;
     public GameObject[] enemies;
 
-    public float mapSize = 20.0f;
+    public List<GameObject> enemiesSpawned = new List<GameObject>();
+
+    public int mapSize = 54;
     
     private void Start() {
         if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
 
         InitializeGame();
+    }
+    
+    private void Update() {
+        RotateWorld();
+
+        if (_Input.K_State) {
+            EndWave();
+        }
+
+        ProcessMovement();
+    }
+    
+    private void OnEnable() {
+        InGameEvent.enemyKill += RemoveEnemy;
+    }
+    
+    private void OnDisable() {
+        InGameEvent.enemyKill -= RemoveEnemy;
     }
 
     private void InitializeGame() {
@@ -27,8 +49,21 @@ public class _GameManager : MonoBehaviour {
         Invoke("EndWave", 135);
     }
 
-    public void EndWave() { 
-        onCombat = false;
+    public void RemoveEnemy(Enemy enemy) { 
+        if (enemiesSpawned.Contains(enemy.gameObject)) enemiesSpawned.Remove(enemy.gameObject);
+    }
+
+    public void EndWave() {
+        if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
+        onCombat = !onCombat;
+        character = null;
+
+        if (enemiesSpawned.Count > 0) { 
+            foreach (GameObject enemy in enemiesSpawned) { 
+                Destroy(enemy, 0.1f);
+            }
+            enemiesSpawned.Clear();
+        }
     }
     
     public void FirstWave() {
@@ -56,18 +91,6 @@ public class _GameManager : MonoBehaviour {
         //Calling method to change the music
 
         SummonWave();
-    }
-
-    private void Update() {
-        RotateWorld();
-
-        if (_Input.K_State) {
-            if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
-            onCombat = !onCombat;
-            character = null;
-        }
-
-        ProcessMovement();
     }
 
     private void RotateWorld() {
@@ -125,7 +148,8 @@ public class _GameManager : MonoBehaviour {
 
     private void SummonWave() {
         Vector2 pos = GetRandomPointOnMap();
-        Instantiate(enemies[0], new Vector3(pos.x, 0, pos.y),Quaternion.identity);
+        GameObject obj = Instantiate(enemies[0], new Vector3(pos.x, 0, pos.y),Quaternion.identity);
+        enemiesSpawned.Add(obj);
     }
 
     private Vector2 GetRandomPointOnMap() {
