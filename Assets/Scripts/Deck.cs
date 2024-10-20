@@ -4,16 +4,19 @@ public class Deck : MonoBehaviour {
     public GameObject cardSelected;
     public bool displayed;
 
+    public _GameManager _Game;
+    
     private void Start() {
+        if (!_Game) _Game = GameObject.Find("UI").GetComponent<_GameManager>();
     }
 
     private void Update() {
         if (!cardSelected && !displayed) displayed = true;
 
-        if (displayed && transform.position.y < 0) { 
+        if (displayed && transform.position.y < 0 && !_Game.onCombat) { 
             float newY = Mathf.Lerp(transform.position.y, 0.0f, 10 * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, newY);
-        } else if (!displayed && transform.position.y > Screen.height * -0.25f) { 
+        } else if (!displayed && transform.position.y > Screen.height * -0.25f && _Game.onCombat) { 
             float newY = Mathf.Lerp(transform.position.y, Screen.height * -0.225f, 10 * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, newY);
         }

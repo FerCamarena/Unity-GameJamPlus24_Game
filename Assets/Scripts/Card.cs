@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler {
     public _InputManager _Input;
+    public _GameManager _Game;
     public Canvas canvas;
     public Deck deck;
     public bool onDrag;
@@ -19,11 +20,14 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     
     private void Start() {
         if (!level) level = GameObject.Find("level").transform;
+        if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
+        if (!_Game) _Game = GameObject.Find("UI").GetComponent<_GameManager>();
     }
 
     private void Update() {
         if (placeholder) {
             placeholder.transform.position = placeholderPos;
+            if (_Game.onCombat) Destroy(placeholder);
         }
         SendRaycast(false);
     }
@@ -74,7 +78,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public void OnEndDrag(PointerEventData eData) {
         deck.cardSelected = null;
         onDrag = false;
-        if (!GetComponent<Image>().enabled && _Input.V_Mouse > Screen.height * 0.15f) {
+        if (!GetComponent<Image>().enabled && _Input.V_Mouse > Screen.height * 0.15f && !_Game.onCombat) {
             CreateDisplay();
         } else if (!GetComponent<Image>().enabled) GetComponent<Image>().enabled = true;
     }
