@@ -123,13 +123,13 @@ public class _GameManager : MonoBehaviour {
             cam.transform.RotateAround(Vector3.zero, Vector3.up, _Input.Lf_Value * .25f);
         }
 
-        /*if (_Input.W_State && cam.transform.rotation.eulerAngles.x <= 50) {
-            Debug.Log(cam.transform.rotation.eulerAngles.x);
-            cam.transform.RotateAround(Vector3.zero, Vector3.left, -_Input.W_Value);
-        } else if(_Input.S_State && cam.transform.rotation.eulerAngles.x >= 10) {
-            Debug.Log(cam.transform.rotation.eulerAngles.x);
-            cam.transform.RotateAround(Vector3.zero, Vector3.left, _Input.S_Value);
-        }*/
+        if (_Input.Up_State && cam.transform.rotation.eulerAngles.x <= 80) {
+            Debug.Log(cam.transform.parent.rotation.eulerAngles.x);
+            cam.transform.parent.RotateAround(Vector3.zero, -cam.transform.right, -_Input.Up_Value * 0.1f);
+        } else if(_Input.Do_State && cam.transform.rotation.eulerAngles.x >= 25) {
+            Debug.Log(cam.transform.parent.rotation.eulerAngles.x);
+            cam.transform.parent.RotateAround(Vector3.zero, -cam.transform.right, _Input.Do_Value * 0.1f);
+        }
     }
     
     private void ProcessMovement() {

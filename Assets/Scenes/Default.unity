@@ -493,6 +493,38 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &362350263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 362350264}
+  m_Layer: 0
+  m_Name: tilter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &362350264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362350263}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: 0, y: 12, z: -25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 519420032}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
 --- !u!1001 &377236685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -640,15 +672,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
-  m_LocalPosition: {x: 0, y: 12, z: -25}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 527204931}
   - {fileID: 1116128702}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
+  m_Father: {fileID: 362350264}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527204930
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,6 +809,7 @@ MonoBehaviour:
   - {fileID: 4396069080292038163, guid: d80ab0a720f7f0e498b3a52ae8c1cea3, type: 3}
   enemiesSpawned: []
   mapSize: 40
+  currentWave: 0
 --- !u!114 &527204936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1953,7 +1986,7 @@ GameObject:
   - component: {fileID: 1945174530}
   - component: {fileID: 1945174529}
   - component: {fileID: 1945174531}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: deck
   m_TagString: Deck
   m_Icon: {fileID: 0}
@@ -2037,6 +2070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardSelected: {fileID: 0}
   displayed: 0
+  _Game: {fileID: 0}
 --- !u!224 &2117048498 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5766576976310650575, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
@@ -2046,5 +2080,5 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 519420032}
+  - {fileID: 362350264}
   - {fileID: 346807877}
