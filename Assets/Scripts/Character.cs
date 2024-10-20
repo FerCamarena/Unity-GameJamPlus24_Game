@@ -3,7 +3,6 @@ using UnityEngine;
 public class Character : Entity {
     
     protected override void Attack() {
-        
     }
     
     public override void TakeHit(float amount) {
@@ -15,6 +14,6 @@ public class Character : Entity {
     public override void Die() {
         base.Die();
 
-        //Here can send GameOver updates
+        InGameEvent.GameOver();
     }
 }
