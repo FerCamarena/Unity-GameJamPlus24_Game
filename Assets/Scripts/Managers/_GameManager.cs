@@ -34,14 +34,6 @@ public class _GameManager : MonoBehaviour {
 
         ProcessMovement();
     }
-    
-    private void OnEnable() {
-        InGameEvent.enemyKill += RemoveEnemy;
-    }
-    
-    private void OnDisable() {
-        InGameEvent.enemyKill -= RemoveEnemy;
-    }
 
     private void InitializeGame() {
         Invoke("FirstWave", 15);
@@ -50,6 +42,7 @@ public class _GameManager : MonoBehaviour {
         Invoke("EndWave", 90);
         Invoke("ThirdWave", 105);
         Invoke("EndWave", 135);
+        Invoke("EndGame", 135);
 
         PlayerPrefs.SetInt("lastPoints", 0);
         PlayerPrefs.SetInt("lastUsed", 0);
@@ -60,17 +53,14 @@ public class _GameManager : MonoBehaviour {
         InGameEvent.GameWon();
     }
 
-    public void RemoveEnemy(Enemy enemy) { 
-        if (enemiesSpawned.Contains(enemy.gameObject)) enemiesSpawned.Remove(enemy.gameObject);
-    }
-
     public void EndWave() {
-        if (currentWave < 2) InGameEvent.WaveEnded();
+        if (currentWave <= 3) InGameEvent.WaveEnded();
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
-        onCombat = !onCombat;
+        onCombat = false;
         character = null;
 
-        if (enemiesSpawned.Count > 0) { 
+        if (enemiesSpawned.Count > 0) {
+            enemiesSpawned.RemoveAll(item => item == null);
             foreach (GameObject enemy in enemiesSpawned) { 
                 Destroy(enemy, 0.1f);
             }
@@ -81,7 +71,7 @@ public class _GameManager : MonoBehaviour {
     public void FirstWave() {
         currentWave++;
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
-        onCombat = !onCombat;
+        onCombat = true;
         character = null;
         //Calling method to stop card playing
         onCombat = true;
@@ -94,7 +84,7 @@ public class _GameManager : MonoBehaviour {
     public void SecondWave() {
         currentWave++;
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
-        onCombat = !onCombat;
+        onCombat = true;
         character = null;
         //Calling method to stop card playing
 

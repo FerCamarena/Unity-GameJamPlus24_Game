@@ -11,9 +11,9 @@ public class Deck : MonoBehaviour {
     }
 
     private void Update() {
-        if (_Game.onCombat) displayed = false;
 
         if (!cardSelected && !displayed && !_Game.onCombat) displayed = true;
+        if (_Game.onCombat) displayed = false;
 
         if (displayed && transform.position.y < 0 && !_Game.onCombat) { 
             float newY = Mathf.Lerp(transform.position.y, 0.0f, 10 * Time.deltaTime);
