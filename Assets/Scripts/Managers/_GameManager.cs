@@ -8,8 +8,15 @@ public class _GameManager : MonoBehaviour {
     public bool onCombat = false;
 
     public GameObject character;
+    public GameObject[] enemies;
 
     public float mapSize = 20.0f;
+    
+    private void Start() {
+        if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
+
+        InvokeRepeating("SummonWave", 1.0f, 1.0f);
+    }
 
     private void Update() {
         RotateWorld();
@@ -39,10 +46,6 @@ public class _GameManager : MonoBehaviour {
         }*/
     }
     
-    private void Start() {
-        if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
-    }
-
     private void ProcessMovement() {
         CheckDimension();
         if (character) MoveCharacter();
@@ -80,11 +83,16 @@ public class _GameManager : MonoBehaviour {
         character.GetComponent<NavMeshAgent>().destination = character.transform.localPosition + move;
     }
 
+    private void SummonWave() {
+        Vector2 pos = GetRandomPointOnMap();
+        Instantiate(enemies[0], new Vector3(pos.x, 0, pos.y),Quaternion.identity);
+    }
+
     private Vector2 GetRandomPointOnMap() {
         float x = Random.value * (Random.value >= 0.5f ? 1 : -1);
         float y = Random.value * (Random.value >= 0.5f ? 1 : -1);
         Vector2 dir = new Vector2(x, y);
 
-        return dir * mapSize;
+        return dir.normalized * mapSize;
     }
 }

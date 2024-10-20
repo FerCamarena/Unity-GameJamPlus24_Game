@@ -762,6 +762,9 @@ MonoBehaviour:
   cam: {fileID: 519420031}
   onCombat: 0
   character: {fileID: 0}
+  enemies:
+  - {fileID: 4396069080292038163, guid: d80ab0a720f7f0e498b3a52ae8c1cea3, type: 3}
+  mapSize: 20
 --- !u!114 &527204936
 MonoBehaviour:
   m_ObjectHideFlags: 0
