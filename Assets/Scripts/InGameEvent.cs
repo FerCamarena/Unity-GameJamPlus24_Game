@@ -6,4 +6,6 @@ using UnityEngine;
 public static class InGameEvent {
     public static Action OnGameOver;
     public static Action OnGameStart;
+
+    public static Action<Enemy> enemyKill;
 }
