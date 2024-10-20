@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 177907715}
   - component: {fileID: 177907717}
   - component: {fileID: 177907716}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: menuOptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,8 +159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -160}
-  m_SizeDelta: {x: 360, y: 480}
+  m_AnchoredPosition: {x: 0, y: -128}
+  m_SizeDelta: {x: 360, y: 420}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &177907716
 MonoBehaviour:
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 347124606}
   - component: {fileID: 347124608}
   - component: {fileID: 347124607}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: eSys
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 428830409}
   - component: {fileID: 428830411}
   - component: {fileID: 428830410}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: menuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 527204933}
   - component: {fileID: 527204932}
   - component: {fileID: 527204935}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 881764291}
   - component: {fileID: 881764293}
   - component: {fileID: 881764292}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: bg_Img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -645,7 +645,7 @@ GameObject:
   - component: {fileID: 910532724}
   - component: {fileID: 910532723}
   - component: {fileID: 910532722}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: quit_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,7 +669,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -96}
+  m_AnchoredPosition: {x: 0, y: -128}
   m_SizeDelta: {x: 320, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910532722
@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 968662358}
   - component: {fileID: 968662357}
   - component: {fileID: 968662356}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: stgs_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -802,7 +802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 32}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &968662356
@@ -851,8 +851,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 527204935}
         m_TargetAssemblyTypeName: _NavManager, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 3
+        m_MethodName: SettingsMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -910,7 +910,7 @@ GameObject:
   - component: {fileID: 1380863963}
   - component: {fileID: 1380863965}
   - component: {fileID: 1380863964}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: label_Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 1538157207}
   - component: {fileID: 1538157209}
   - component: {fileID: 1538157208}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: logo_Img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,7 +1120,7 @@ GameObject:
   - component: {fileID: 1539221539}
   - component: {fileID: 1539221538}
   - component: {fileID: 1539221537}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: play_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1144,7 +1144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 159.99998}
+  m_AnchoredPosition: {x: 0, y: 128}
   m_SizeDelta: {x: 320, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1539221537
@@ -1252,7 +1252,7 @@ GameObject:
   - component: {fileID: 1704210499}
   - component: {fileID: 1704210501}
   - component: {fileID: 1704210500}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: label_Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1386,7 +1386,7 @@ GameObject:
   - component: {fileID: 2013494090}
   - component: {fileID: 2013494092}
   - component: {fileID: 2013494091}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: label_Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}

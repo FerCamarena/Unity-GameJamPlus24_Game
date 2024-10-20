@@ -162,6 +162,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: defaultCard_Obj_05
       objectReference: {fileID: 0}
+    - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5766576976310650575, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -291,6 +295,10 @@ PrefabInstance:
     - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Name
       value: defaultCard_Obj
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5766576976310650575, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Pivot.x
@@ -428,7 +436,7 @@ GameObject:
   - component: {fileID: 347124606}
   - component: {fileID: 347124608}
   - component: {fileID: 347124607}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: eSys
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,8 +662,9 @@ GameObject:
   - component: {fileID: 527204933}
   - component: {fileID: 527204932}
   - component: {fileID: 527204936}
+  - component: {fileID: 527204937}
   - component: {fileID: 527204935}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,10 +770,12 @@ MonoBehaviour:
   _Input: {fileID: 527204936}
   cam: {fileID: 519420031}
   onCombat: 0
+  forceEnd: 1
   character: {fileID: 0}
   enemies:
   - {fileID: 4396069080292038163, guid: d80ab0a720f7f0e498b3a52ae8c1cea3, type: 3}
-  mapSize: 20
+  enemiesSpawned: []
+  mapSize: 40
 --- !u!114 &527204936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -796,6 +807,21 @@ MonoBehaviour:
   H_Mouse: 0
   V_Mouse: 0
   K_State: 0
+--- !u!114 &527204937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527204930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746c64db5fe6dc54692fb57759979dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterMixer: {fileID: 24100000, guid: 10ded07b797860446bd97044d6dc1b26, type: 2}
+  fxMixer: {fileID: 24100000, guid: 13057118c3ddc75459e20ed079c4397d, type: 2}
+  musicMixer: {fileID: 24100000, guid: 5eeb179cce9204049a39d8a63ad0dfc7, type: 2}
 --- !u!1 &848712530
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +990,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: defaultCard_Obj_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5766576976310650575, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1088,6 +1118,10 @@ PrefabInstance:
     - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Name
       value: defaultCard_Obj_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5766576976310650575, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Pivot.x
@@ -1478,6 +1512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: defaultCard_Obj_03
       objectReference: {fileID: 0}
+    - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5766576976310650575, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1680,6 +1718,10 @@ PrefabInstance:
     - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Name
       value: defaultCard_Obj_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551940594263158951, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5766576976310650575, guid: 2b1255f24c0bce9469ba8346b13b050f, type: 3}
       propertyPath: m_Pivot.x
