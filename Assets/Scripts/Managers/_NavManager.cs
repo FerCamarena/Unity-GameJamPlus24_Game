@@ -1,6 +1,7 @@
 //Libraries
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 //Class for managging the user navigation between game scenes
@@ -9,6 +10,7 @@ public class _NavManager : MonoBehaviour {
     [SerializeField] private AudioMixer masterMixer;
     [SerializeField] private AudioMixer fxMixer;
     [SerializeField] private AudioMixer musicMixer;
+    public _InputManager _Input;
 
     //Method called once the object becomes active
     private void OnEnable() {
@@ -23,6 +25,7 @@ public class _NavManager : MonoBehaviour {
 
     //Method called once the script instance is loaded
     private void Awake() {
+        if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
         //Loading defaults preferences
         if (PlayerPrefs.GetInt("settingsMenu") < 0 || !PlayerPrefs.HasKey("settingsMenu") || PlayerPrefs.GetInt("settingsMenu") > 1) {
             //Checking the first time playing
@@ -34,6 +37,12 @@ public class _NavManager : MonoBehaviour {
         if (masterMixer) masterMixer.SetFloat("mixerMaster", PlayerPrefs.GetFloat("master") != 0 ? 0 : -80);
         if (fxMixer) fxMixer.SetFloat("mixerFX", PlayerPrefs.GetFloat("fx") != 0 ? 0 : -80);
         if (musicMixer) musicMixer.SetFloat("mixerMusic", PlayerPrefs.GetFloat("music") != 0 ? 0 : -80);
+    }
+
+    private void Update() {
+        if (_Input.Esc_State && PlayerPrefs.GetInt("settingsMenu") == 0) SettingsMenu();
+
+        if (!EventSystem.current.currentSelectedGameObject) EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
     }
 
     //Method for starting a new game
