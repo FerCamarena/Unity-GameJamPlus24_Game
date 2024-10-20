@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3586889272583865466}
   - component: {fileID: 1996649347856739772}
   - component: {fileID: 1281476313734366353}
+  - component: {fileID: -4694051686615561943}
+  - component: {fileID: 3190257483841095846}
   m_Layer: 8
   m_Name: defaultStructure_Pfb
   m_TagString: Structure
@@ -150,3 +152,44 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &-4694051686615561943
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396069080292038163}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 20
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3190257483841095846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396069080292038163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23a66d48effa324f959f2ed9237a076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+  baseHealth: 50
+  baseRegen: 0
+  baseDamage: 5
+  baseRange: 10
+  casting: 0
+  baseCD: 1
+  closestTarget: {fileID: 0}
