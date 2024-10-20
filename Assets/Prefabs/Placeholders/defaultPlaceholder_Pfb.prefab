@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 703613607150211769}
   - component: {fileID: 3502635433807792417}
   - component: {fileID: 2125146749746926777}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: defaultPlaceholder_Pfb
   m_TagString: Placeholder
   m_Icon: {fileID: 0}

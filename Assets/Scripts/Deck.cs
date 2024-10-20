@@ -11,12 +11,14 @@ public class Deck : MonoBehaviour {
     }
 
     private void Update() {
+        if (_Game.onCombat) displayed = false;
+
         if (!cardSelected && !displayed) displayed = true;
 
         if (displayed && transform.position.y < 0 && !_Game.onCombat) { 
             float newY = Mathf.Lerp(transform.position.y, 0.0f, 10 * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, newY);
-        } else if (!displayed && transform.position.y > Screen.height * -0.25f && _Game.onCombat) { 
+        } else if (!displayed && transform.position.y > Screen.height * -0.25f) { 
             float newY = Mathf.Lerp(transform.position.y, Screen.height * -0.225f, 10 * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, newY);
         }

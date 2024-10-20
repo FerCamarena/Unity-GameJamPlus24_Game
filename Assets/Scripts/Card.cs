@@ -64,7 +64,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             deck.displayed = false;
         } else if (_Input.V_Mouse < Screen.height * 0.1f) {
             deck.displayed = true;
-            if (!GetComponent<Image>().enabled) GetComponent<Image>().enabled = true;
+            if (!GetComponent<Image>().enabled && !_Game.onCombat) GetComponent<Image>().enabled = true;
             if (placeholder) {
                 Destroy(placeholder);
                 placeholder = null;
