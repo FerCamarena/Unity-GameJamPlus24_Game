@@ -3,6 +3,8 @@ using UnityEngine;
 public class Structure : Entity {
     public Transform closestTarget;
 
+    public GameObject displaySpawn;
+
     protected override void Update() {
         base.Update();
 
@@ -36,6 +38,14 @@ public class Structure : Entity {
     private void OnTriggerExit(Collider obj) {
         if (obj.gameObject.layer == 10) {
             if (closestTarget == obj.transform) closestTarget = null;
+        }
+    }
+
+    public override void Die() {
+        base.Die();
+
+        if (displaySpawn) {
+            Destroy(displaySpawn);
         }
     }
 }

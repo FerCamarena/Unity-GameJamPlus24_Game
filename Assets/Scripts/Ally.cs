@@ -10,6 +10,8 @@ public class Ally : Entity {
     public bool thinking = false;
     public Vector3 patrolDir = Vector3.zero;
 
+    public GameObject displaySpawn;
+
     protected override void Start() {
         GetComponent<NavMeshAgent>().stoppingDistance = baseRange - 1;
 
@@ -85,6 +87,14 @@ public class Ally : Entity {
             if (allTargets.Contains(obj.transform)) {
                 allTargets.Remove(obj.transform);
             }
+        }
+    }
+
+    public override void Die() {
+        base.Die();
+
+        if (displaySpawn) {
+            Destroy(displaySpawn);
         }
     }
 }

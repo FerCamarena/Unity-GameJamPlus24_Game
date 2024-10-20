@@ -32,6 +32,8 @@ public class Display : MonoBehaviour {
         if (!objectGenerated) {
             objectGenerated = Instantiate(objectPrefab, transform.position, Quaternion.identity, levelParent);
             GetComponent<SpriteRenderer>().enabled = false;
+            if (objectGenerated.TryGetComponent<Structure>(out Structure st)) st.displaySpawn = gameObject;
+            if (objectGenerated.TryGetComponent<Ally>(out Ally a)) a.displaySpawn = gameObject;
             if (!navMesh) navMesh = GameObject.Find("navMesh3D").GetComponent<NavMeshSurface>();
             navMesh.BuildNavMesh();
         } else {
