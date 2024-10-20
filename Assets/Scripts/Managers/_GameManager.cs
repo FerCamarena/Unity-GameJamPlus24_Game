@@ -125,7 +125,7 @@ public class _GameManager : MonoBehaviour {
 
         if (_Input.Up_State && cam.transform.rotation.eulerAngles.x <= 80) {
             Debug.Log(cam.transform.parent.rotation.eulerAngles.x);
-            cam.transform.parent.RotateAround(Vector3.zero, -cam.transform.right, -_Input.Up_Value * 0.1f);
+            cam.transform.parent.RotateAround(Vector3.zero, -cam.transform.right, _Input.Up_Value * -0.1f);
         } else if(_Input.Do_State && cam.transform.rotation.eulerAngles.x >= 25) {
             Debug.Log(cam.transform.parent.rotation.eulerAngles.x);
             cam.transform.parent.RotateAround(Vector3.zero, -cam.transform.right, _Input.Do_Value * 0.1f);
