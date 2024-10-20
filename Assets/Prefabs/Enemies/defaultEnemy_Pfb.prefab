@@ -166,7 +166,9 @@ MonoBehaviour:
   health: 10
   baseHealth: 10
   baseRegen: 0.1
-  baseDamage: 1
+  baseDamage: 2
   baseRange: 2
+  casting: 0
+  baseCD: 2
   closestTarget: {fileID: 0}
   allTargets: []

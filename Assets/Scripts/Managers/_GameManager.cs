@@ -43,7 +43,7 @@ public class _GameManager : MonoBehaviour {
 
     private void ProcessMovement() {
         CheckDimension();
-        MoveCharacter();
+        if (character) MoveCharacter();
 }
 
     private void CheckDimension(){
@@ -54,7 +54,7 @@ public class _GameManager : MonoBehaviour {
     }
 
     private void MoveCharacter() {
-        if (character && !character.GetComponent<NavMeshAgent>().enabled) character.GetComponent<NavMeshAgent>().enabled = true;
+        if (!character.GetComponent<NavMeshAgent>().enabled) character.GetComponent<NavMeshAgent>().enabled = true;
 
         Vector3 move = Vector3.zero;
         if (_Input.A_State) {

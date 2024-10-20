@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using System.Collections;
 
 public class Enemy : Entity {
     public Transform closestTarget;
@@ -22,6 +23,8 @@ public class Enemy : Entity {
         if(closestTarget.TryGetComponent<Entity>(out Entity e)) {
             e.TakeHit(baseDamage);
         }
+
+        StartCoroutine(TryAttack());
     }
 
     private void UpdateTargets() {
@@ -43,15 +46,14 @@ public class Enemy : Entity {
 
         if (closestTarget) {
             direction = closestTarget.localPosition;
-            if (Vector3.Distance(transform.position, closestTarget.position) < baseRange) {
-                Attack();
+            if (Vector3.Distance(transform.position, closestTarget.position) < baseRange && !casting) {
+                Attack(); 
             }
         }
 
         GetComponent<NavMeshAgent>().destination = direction;
-
     }
-    
+
     private void OnTriggerStay(Collider obj) {
         if (obj.gameObject.layer == 8) {
             if (!allTargets.Contains(obj.transform)) {
