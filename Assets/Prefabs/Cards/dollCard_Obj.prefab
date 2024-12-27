@@ -97,7 +97,7 @@ MonoBehaviour:
   empty: 0
   placeholder: {fileID: 0}
   placeholderPrefab: {fileID: 1069311006730747522, guid: b1e4d743ed5ef8c4aa394eb42b57bc61, type: 3}
-  unitDisplayPrefab: {fileID: 4499975434167525236, guid: 0dbf1bee8fe31e443a03a440b18a5bc1, type: 3}
+  unitDisplayPrefab: {fileID: 4499975434167525236, guid: 8a6991781289dfa4398dcd6ffcd32c91, type: 3}
   level: {fileID: 0}
   placeholderPos: {x: 0, y: 0, z: 0}
   navMesh: {fileID: 0}

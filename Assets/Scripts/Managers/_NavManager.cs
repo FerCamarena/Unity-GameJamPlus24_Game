@@ -20,8 +20,8 @@ public class _NavManager : MonoBehaviour {
         InGameEvent.GameOver += GameOver;
         InGameEvent.GameWon += GameWon;
 
-        if (ndStar && PlayerPrefs.GetInt("lastPoints") < 140) ndStar.SetActive(false);
-        if (rdStar && PlayerPrefs.GetInt("lastUsed") > 4) rdStar.SetActive(false);
+        if (ndStar && PlayerPrefs.GetInt("lastPoints") < 290) ndStar.SetActive(false);
+        if (rdStar && PlayerPrefs.GetInt("lastUsed") > 12) rdStar.SetActive(false);
     }
     //Method called once the object becomes inactive
     private void OnDisable() {
