@@ -7,6 +7,8 @@ public class Structure : Entity {
 
     public GameObject displaySpawn;
 
+    public ParticleSystem par;
+
     protected override void Start() {
         base.Start();
 
@@ -25,6 +27,7 @@ public class Structure : Entity {
         if(closestTarget.TryGetComponent<Entity>(out Entity e)) {
             e.TakeHit(baseDamage);
             if (e.health <= baseDamage) allTargets.Remove(closestTarget);
+            par.Play();
         }
 
         StartCoroutine(TryAttack());

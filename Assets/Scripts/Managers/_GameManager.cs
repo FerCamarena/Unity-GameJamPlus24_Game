@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using System.Collections;
+using TMPro;
 
 public class _GameManager : MonoBehaviour {
     public _InputManager _Input;
@@ -13,11 +15,24 @@ public class _GameManager : MonoBehaviour {
     public GameObject[] enemies;
 
     public List<GameObject> enemiesSpawned = new List<GameObject>();
+    public List<GameObject> enemiesToSpawn = new List<GameObject>();
 
     public int mapSize = 54;
     public int currentWave = 0;
 
     public int enemyAmount = 1;
+
+    public AudioClip combat;
+    public AudioClip building;
+
+    public AudioSource soundtrack;
+
+    public Transform DECK;
+
+    public GameObject[] cards;
+
+    public List<string> letreros;
+    public TextMeshProUGUI letrero;
 
     private void Start() {
         if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
@@ -28,33 +43,52 @@ public class _GameManager : MonoBehaviour {
     private void Update() {
         RotateWorld();
 
-        if (_Input.K_State) {
-            EndWave();
-        }
-
         ProcessMovement();
     }
 
+    public IEnumerator SpawnEnemies() {
+        foreach (GameObject enemy in enemiesToSpawn) {
+            Vector2 pos = GetRandomPointOnMap();
+            GameObject obj = Instantiate(enemy, new Vector3(pos.x, 0, pos.y),Quaternion.identity);
+            enemiesSpawned.Add(obj);
+            yield return new WaitForSeconds(1);
+        }
+        enemiesToSpawn.Clear();
+    }
+
     private void InitializeGame() {
-        Invoke("FirstWave", 15);
-        Invoke("EndWave", 45);
-        Invoke("SecondWave", 60);
-        Invoke("EndWave", 90);
-        Invoke("ThirdWave", 105);
-        Invoke("EndWave", 135);
-        Invoke("EndGame", 135);
+        Invoke("FirstWave", 38f);
+        Invoke("EndWave", 38f + 58f);
+        Invoke("SecondWave", 38f + 58f + 38f);
+        Invoke("EndWave", 38f + 58f + 38f + 58f);
+        Invoke("ThirdWave", 38f + 58f + 38f + 58f + 38f);
+        Invoke("EndWave", 38f + 58f + 38f + 58f + 38f + 58f);
+        Invoke("EndGame", 300);
+
+        if (currentWave == 0)  StartCoroutine(TuTORIAIL());
 
         PlayerPrefs.SetInt("lastPoints", 0);
         PlayerPrefs.SetInt("lastUsed", 0);
         PlayerPrefs.Save();
     }
 
+    private IEnumerator TuTORIAIL() {
+        foreach (string s in letreros) {
+            letrero.text = s;
+            yield return new WaitForSecondsRealtime(6);
+        }
+        Destroy(letrero.gameObject);
+    }
+
     public void EndGame() {
+        soundtrack.clip = building;
+        soundtrack.Play();
         InGameEvent.GameWon();
     }
 
     public void EndWave() {
         if (currentWave <= 3) InGameEvent.WaveEnded();
+        if (currentWave == 2) for (int i = 0; i < cards.Length; i++) Instantiate(cards[i], DECK.position, Quaternion.identity, DECK);
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
         onCombat = false;
         character = null;
@@ -66,9 +100,15 @@ public class _GameManager : MonoBehaviour {
             }
             enemiesSpawned.Clear();
         }
+
+        if (currentWave == 1) for (int i = 0; i < cards.Length; i++) Instantiate(cards[i], DECK.position, Quaternion.identity, DECK);
+        if (currentWave == 1) for (int i = 0; i < cards.Length; i++) Instantiate(cards[i], DECK.position, Quaternion.identity, DECK);
     }
     
     public void FirstWave() {
+
+        soundtrack.clip = combat;
+        soundtrack.Play();
         currentWave++;
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
         onCombat = true;
@@ -79,9 +119,13 @@ public class _GameManager : MonoBehaviour {
         //Calling method to change the music
 
         SummonWave();
+        if (enemiesToSpawn.Count > 0 && onCombat) StartCoroutine(SpawnEnemies());
     }
     
     public void SecondWave() {
+
+        soundtrack.clip = combat;
+        soundtrack.Play();
         currentWave++;
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
         onCombat = true;
@@ -93,9 +137,13 @@ public class _GameManager : MonoBehaviour {
         //Calling method to change the music
 
         SummonWave();
+        if (enemiesToSpawn.Count > 0 && onCombat) StartCoroutine(SpawnEnemies());
     }
     
     public void ThirdWave() {
+
+        soundtrack.clip = combat;
+        soundtrack.Play();
         currentWave++;
         if (!onCombat) character.GetComponent<NavMeshAgent>().enabled = false;
         onCombat = !onCombat;
@@ -107,6 +155,7 @@ public class _GameManager : MonoBehaviour {
         //Calling method to change the music
 
         SummonWave();
+        if (enemiesToSpawn.Count > 0 && onCombat) StartCoroutine(SpawnEnemies());
     }
 
     private void RotateWorld() {
@@ -161,10 +210,9 @@ public class _GameManager : MonoBehaviour {
     }
 
     private void SummonWave() {
-        for(int i = 0; i < enemyAmount; i++) { 
-            Vector2 pos = GetRandomPointOnMap();
-            GameObject obj = Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(pos.x, 0, pos.y),Quaternion.identity);
-            enemiesSpawned.Add(obj);
+        for(int i = 0; i < enemyAmount * (currentWave); i++) { 
+            GameObject obj = enemies[Random.Range(0, enemies.Length)];
+            enemiesToSpawn.Add(obj);
         }
     }
 

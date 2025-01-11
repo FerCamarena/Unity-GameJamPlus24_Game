@@ -23,6 +23,8 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (!level) level = GameObject.Find("level").transform;
         if (!_Input) _Input = GameObject.Find("UI").GetComponent<_InputManager>();
         if (!_Game) _Game = GameObject.Find("UI").GetComponent<_GameManager>();
+        if (!canvas) canvas = GameObject.Find("UI").GetComponent<Canvas>();
+        if (!deck) deck = GameObject.Find("deck").GetComponent<Deck>();
     }
 
     private void Update() {

@@ -27,6 +27,7 @@ public class _PauseManager : MonoBehaviour {
     [SerializeField] private bool isActionConfirmed;
     [SerializeField] private Coroutine userConfirmCoroutine;
 
+
     public void ToggleFXVolume() {
         if (PlayerPrefs.GetInt("fx") != 0) {
             fxMixer.SetFloat("mixerFX", -80);

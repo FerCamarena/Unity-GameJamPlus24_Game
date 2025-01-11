@@ -15,11 +15,11 @@ public class Deck : MonoBehaviour {
         if (!cardSelected && !displayed && !_Game.onCombat) displayed = true;
         if (_Game.onCombat) displayed = false;
 
-        if (displayed && transform.position.y < 0 && !_Game.onCombat) { 
+        if (displayed && transform.position.y < -64 && !_Game.onCombat) { 
             float newY = Mathf.Lerp(transform.position.y, 0.0f, 10 * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, newY);
-        } else if (!displayed && transform.position.y > Screen.height * -0.25f) { 
-            float newY = Mathf.Lerp(transform.position.y, Screen.height * -0.225f, 10 * Time.deltaTime);
+        } else if (!displayed && transform.position.y > Screen.height * -0.35f) { 
+            float newY = Mathf.Lerp(transform.position.y, Screen.height * -0.333f, 10 * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, newY);
         }
 
@@ -33,7 +33,7 @@ public class Deck : MonoBehaviour {
                 if (!card.onDrag) {
                     float newX = startPos + (i * card.GetComponent<RectTransform>().rect.width * 1.1f);
                     float finalX = Mathf.Lerp(card.transform.localPosition.x, newX, Time.deltaTime * 8);
-                    card.transform.localPosition = new Vector2(finalX, transform.position.y + 18);
+                    card.transform.localPosition = new Vector2(finalX, transform.position.y + 192);
                 }
             }
         }
